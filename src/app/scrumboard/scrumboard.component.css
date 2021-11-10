@@ -1,0 +1,2455 @@
+*, *::after, *::before {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+    background:#808080;;
+    margin-right: 1px;
+}
+
+::-webkit-scrollbar:hover {
+  width: 10px;
+}
+
+
+::-webkit-scrollbar-thumb {
+    background:#808080
+}
+
+::-webkit-scrollbar-track {
+  background: #E5E5E5;
+}
+
+html{
+  height:100%;
+  overflow: hidden;
+}
+
+body {
+  background:white;
+  color: black;
+  height:100%;
+  position:fixed;
+  margin:0;
+  padding:0;
+}
+
+.preloader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background: #26A69A;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.page-content {
+  max-width: 100vw;
+  margin: 0 auto;
+  height:100vh;
+  max-height:100vh;
+  overflow: hidden;
+}
+
+/* #mloaderImg {
+    display: none;
+}
+
+#loadrImg {
+  display: block;
+} */
+
+/* @media  (min-width: 360px) {
+  #loadrImg {
+    display: none;
+  }
+  #mloaderImg {
+    display: block;
+  }
+} */
+
+
+
+.navbarr {
+  top: 0;
+  width: 100vw;
+  left: 0;
+  background: #26A69A;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border: none;
+}
+
+
+.navbarr ul {
+  border-bottom: none;
+}
+
+/* @media (min-width: 800px) {
+  .navbarr img {
+    margin-left: 10px
+  }
+} */
+
+@media (min-width: 1100px) {
+  .navbarr img {
+    margin-left: 5px
+  }
+}
+
+@media (min-width: 1300px) {
+  .navbarr img {
+    margin-left: 10px
+  }
+}
+
+.navbarr a {
+  float: left;
+  display: block;
+  text-align: center;
+  padding: 11px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+
+
+
+.main {
+  padding: 16px;
+  padding-top: 0px;
+}
+/*
+.split {
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  padding-top: 22px;
+} */
+
+.splitleft {
+  overflow-y: scroll;
+  max-height:95vh;
+}
+
+
+
+@media screen and (max-height:585px) and (max-width:1760px) and (min-height:320px) and (min-width:1200px){
+  .splitright{
+  background: #343434;
+  overflow-y: scroll;
+  margin-top: -1px;
+  min-height:90vh;
+  max-height:90vh; 
+  }
+
+  #messages{
+    height:70%;
+    overflow-y: scroll;
+    overflow-x:hidden;
+  }
+}
+
+
+@media screen and (min-width:450px) and (min-height:586px)
+{
+  .splitright {
+ 
+    /*right: 0;*/
+    
+    background: #343434;
+    overflow-y: scroll;
+    margin-top: -1px;
+    min-height:95vh;
+    max-height:95vh; 
+    
+    
+  }
+
+  #messages{
+    height:78%;
+    overflow-y: scroll;
+    overflow-x:hidden;
+  }
+}
+
+
+
+.ex h4 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 16px;
+  margin-top: 10px;
+  margin-bottom: 18px;
+  color:rgba(0, 0, 0, 1);
+
+}
+
+.ex {
+  z-index:3;
+  background: rgba(255, 255, 255, 0.5);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  border-radius: 10px;
+  border-top: 10px solid #E5E5E5;
+  align-items: center!important;
+  text-align: center!important;
+  /* padding: 5px 10px 8px 8px; */
+  min-height: 223px;
+}
+
+.ex .excontent, .ex_taskHistory .excontent{ 
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: #FFFFFF;
+  border-radius: 5px;
+  padding: 7px;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.9);
+  margin-bottom: 1.5em;
+  transition: ease-in 0.5s;
+  margin-left: 8px;
+  margin-right: 8px;
+  margin-top: 5px;
+}
+
+.ex .excontent .uploadedImage img, .ex_taskHistory .excontent .uploadedImage img{
+  width: 70%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.ex .excontent .uploadedImage img:hover, .ex_taskHistory .excontent .uploadedImage img:hover{
+  opacity: 0.7;
+}
+
+.ex .excontent .scrumtools, .ex_taskHistory .excontent .scrumtools{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  line-height: 13px;
+  padding-top: 20px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-bottom: 3px;
+  opacity: 1;
+}
+
+.ex .excontent  n, .ex_taskHistory .excontent n {
+  font-size: 10px;
+}
+
+.ex .excontent .scrumtools span, .ex_taskHistory .excontent .scrumtools span {
+  font-size: 15px; 
+  margin-right: 8px;
+  transition: ease-in 0.2s;
+}
+
+.ex .excontent .scrumtools i, .ex_taskHistory .excontent .scrumtools i {
+  font-size: 14px; 
+  margin-right: 6px;
+  transition: ease-in 0.2s;
+  
+}
+
+.ex .icon-move, .ex_taskHistory .icon-move {
+  font-size: 17px!important;
+}
+
+.tools {
+  display: none;
+  transition: ease-in 0.2s;
+}
+
+.excontent:hover .tools {
+  transition: ease-in 0.2s;
+  display: inline-block;
+  animation-name: fadeInScrumTools;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 0.5s;
+}
+
+.excontent .tools:hover {
+  color: #4DFFD4!important;
+}
+
+.child{
+  border-left: 9px solid #000;
+  margin-left: -4px;
+  min-height: 113px;
+  margin-bottom: 10px
+}
+
+.ex .fordone {
+  margin-top: 35px!important;
+}
+
+/* #tfw #tft #verify #done {
+  background: rgba(255, 255, 255, 0.5);
+} */
+
+/* #done {
+  margin-left: 10px;
+}
+
+.fordone {
+  margin-left: 5px;
+} */
+
+/*MODAL CSS STARTS FROM HERE*/
+
+.modal,  .image_modal {
+  display: none;
+  position: fixed;
+  z-index: 2;
+  padding-top: 100px; 
+  left: 0;
+  top: 0;
+  width: 100%; 
+  height: 100%; 
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.image_modal {
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.9);
+}
+
+.modal-contentuploadedImage {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  -webkit-animation-name: zoomImage;
+  -webkit-animation-duration: 0.6s;
+  animation-name: zoomImage;
+  animation-duration: 0.6s;
+}
+
+@-webkit-keyframes zoomImage {
+  from {-webkit-transform:scale(0)} 
+  to {-webkit-transform:scale(1)}
+}
+
+@keyframes zoomImage {
+  from {transform:scale(0)} 
+  to {transform:scale(1)}
+}
+
+@media only screen and (max-width: 700px){
+  .modal-contentuploadedImage {
+    width: 100%;
+  }
+}
+
+.modal-contentForTask {
+  border-radius: 5px;
+  background-color: #fefefe;
+  margin: auto;
+  margin-top:17vh;
+  margin-left: 15em;
+  padding: 0;
+  border: 1px solid #888;
+  /* width: 50%; */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  width: 621px;
+  height: 309px;
+  
+}
+
+.modal-contentForImage {
+  border-radius: 5px;
+  background-color: #fefefe;
+  margin: auto;
+  margin-top:17vh;
+  margin-left: 15em;
+  padding: 0;
+  border: 1px solid #888;
+  /* width: 50%; */
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  width: 621px;
+  height: 203px;
+  
+}
+
+/* Add Animation */
+@-webkit-keyframes animatetop {
+  from {top:-300px; opacity:0} 
+  to {top:0; opacity:1}
+}
+
+@keyframes animatetop {
+  from {top:-300px; opacity:0}
+  to {top:0; opacity:1}
+}
+
+.close:hover, .close:focus {
+  cursor: pointer;
+}
+
+.modal-header {
+  height: 44px;
+  background-color: rgba(0, 0, 0, 0.1);
+  
+  
+}
+
+textarea [mention] {
+  background-color: red;
+}
+
+.modal-bodyForTask {
+  padding: 2px 16px;
+}
+
+.modal-bodyForNote {
+  background: #FAFAFA;
+}
+
+.insidemodalContentForTask, #changeUserRoleModal .insidemodalContentForChangeRole{
+  width: 100%;
+  height: 142px;
+  margin-top: 15px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border-radius: 10px;
+  outline-color: transparent;
+  padding: 8px;
+  resize: none;
+  font-size: 13px;
+}
+
+#changeUserRoleModal .insidemodalContentForChangeRole{
+  height: 38px;
+  overflow: hidden;
+  padding: 5px 22px;
+  font-size: 13px;
+  font-weight: normal;
+  font-family: 'roboto', sans-serif;
+  color: rgba(0, 0, 0);
+  margin-top: 0px;
+  background: #FAFAFA;
+}
+
+#changeUserRoleModal #changeUserRoleForm .choose_role{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 14px;
+  color: rgba(0, 0, 0, 0.6);
+
+}
+
+#changeUserRoleModal .remove_user {
+  font-family: SF;
+  font-size: 14px;
+  line-height: 80px;
+  align-items: center;
+  text-align: center;
+  color: #FF3A38;
+  font-weight: bold;
+  width: 100%;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+.insidemodalContentForTask:focus {
+  border: 2px solid rgba(0, 0, 0, 0.4);
+}
+
+.insidemodalContentForImageUpload {
+  width: 453px;
+  height: 38px;
+  margin-top:15px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border-radius: 10px;
+  padding-left: 16px;
+  padding-top: 5px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.modal-contentForImage {
+    border-radius: 5px;
+    background-color: #fefefe;
+    margin: auto;
+    margin-top:17vh;
+    margin-left: 15em;
+    padding: 0;
+    border: 1px solid #888;
+    /* width: 50%; */
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    width: 621px;
+    height: 203px;
+    
+  }
+
+.addT, .addNT {
+  color:#26A69A;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  line-height: 16px;
+}
+
+/* #addNoteModal .addNT {
+  margin-top: -20px!important;
+} */
+
+.submitTask {
+  margin-top: 20px;
+  margin-left: 174px;
+}
+
+.submitNote {
+  margin-top: 3em!important;
+  margin-left: 361px;
+}
+
+.uploadImg {
+  margin-top: 20px;
+  margin-left: 200px;
+}
+
+.closebtn {
+  background: none;
+  font-size: 14px;
+  line-height: 17px;
+  color: black;
+  font-weight: normal;
+  outline: none;
+  font-family: SF;
+  margin-left: 5px;
+}
+
+
+.addTbtn {
+  background: #4DFFD4;
+  padding: 6px 46px;
+  font-weight: bold;
+  font-size: 14px;
+  font-family: SF;
+  color: black;
+}
+
+.addTbtn:focus {
+  outline-color: transparent!important;
+}
+
+.openAddTaskModalBtn {
+  height: 35px;
+  cursor: pointer;
+  background: #4DFFD4;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: none;
+  width: 150px;
+  font-weight: bold;
+  font-size: 14px;
+  /* left: 2%;
+  right: 86.11%;
+  bottom: 4%; */
+  
+}
+
+.openAddNoteModalbtn {
+  width: 35px;
+  height: 34px;
+  cursor: pointer;
+  background: #4DFFD4;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: none;
+  font-weight: bold;
+  padding: 5px;
+  margin-left: 10px;
+  /* position: fixed;
+  left: 13.5%;
+  bottom: 4%; */
+  
+}
+
+.openModalForTaskandNote {
+  position: fixed;
+  z-index: 5;
+  bottom: 4%;
+  margin-left: 10px;
+  display: inline;
+}
+
+#addTaskModal .modal-header .headerUserTitle, #editTaskModal .modal-header .headerUserTitle, #changeUserRoleModal .modal-header .headerUserTitle, #userProfileModal .headerUserTitle{
+  font-size: 13px;
+  font-weight: bold;
+  color: #59BB1E;
+  position: relative;
+  margin-left: 7px;
+  margin-top: -6px;
+}
+
+#addTaskModal .modal-header .headerUserRole, #editTaskModal .modal-header .headerUserRole, #changeUserRoleModal .modal-header .headerUserRole {
+  font-size: 10px;
+  color: #333333;
+  position: absolute;
+  margin-top: 8px;
+  margin-left: 2.8em;
+}
+
+
+#addNoteModal .modal-header {
+  justify-content: unset;
+}
+
+#addNoteModal .modal-header .headerUserTitle{
+  position: relative;
+  font-size: 13px;
+  font-weight: bold;
+  color: #59BB1E;
+  margin-top: -10px;
+  margin-left: 0.6em;
+  
+}
+
+#addNoteModal .modal-header .headerUserRole{
+  font-size: 10px;
+  color: #333333;
+  margin-left: 3em;
+  margin-top: 5px;
+  position: absolute;
+}
+
+#userProfileModal .headerUserRole {
+  margin-top: -10px;
+  font-size: 10px;
+  margin-left: 2.8em;
+}
+
+#addNoteModal .modal-contentForNote .insidemodalContentForNote {
+  width: 954px;
+  height: 132px;
+  margin-top:15px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  box-sizing: border-box;
+  border-radius: 10px;
+  outline-color: transparent;
+  padding: 8px;
+  resize: none;
+  margin-top: 6px;
+}
+
+#addNoteModal .modal-contentForNote {
+  background-color: #fefefe;
+  margin: auto;
+  margin-top:-15vh;
+  padding: 0;
+  border: 1px solid #888;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  width: 994px;
+  height: 100%;
+  
+}
+
+#addNoteModal .splitNoteModal {
+  width: 994px;
+  position: fixed;
+  z-index: 1;
+  overflow-x: hidden;
+}
+
+.ex .excontent .task_days_failed {
+  background: #C90000;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  color: white;
+  font-size: 9px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  text-align: center;
+  line-height: 15px;
+  margin-left: -13px;
+  margin-top: -13px;
+}
+
+#addNoteModal .upside {
+  top: 0;
+  background: #FAFAFA;
+  height: 55%;
+  overflow: hidden;
+}
+
+#addNoteModal .upside .modal-header {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+#addNoteModal .downside {
+  bottom: 0;
+  background: #FFFFFF;
+  height: 45%;
+}
+
+
+.priorityI input[type=radio]{
+  box-shadow: none;
+  margin-right: 3px;
+  float: left;
+  clear: none;
+}
+
+.priorityI  span{
+  color: #000;
+  margin-right: 50px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  font-family: 'Roboto', sans-serif;
+  float: left;
+  clear: none;
+}
+
+.int {
+  color: rgba(51, 51, 51, 0.5);
+}
+
+.int i:first-letter {
+  padding-bottom: 10px!important;
+  /* line-height: 10px; */
+  /* font-size: 50px; */
+  margin-left: 5px;
+}
+
+.userNoteHistory .h2 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+
+.userNoteHistory .h4{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.userNoteHistory span {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.userNoteHistory .addN {
+  color:#26A69A;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: 'Roboto', sans-serif;
+  line-height: 16px;
+  font-weight: bold;
+  
+}
+
+.modal-contentForImage input[type="file"] {
+  display: none;
+  /* background-color: #FFFFFF;
+  color: black;
+  opacity: 0.0;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 16px; */
+}
+
+.modal-contentForImage .imgMsg {
+  font-size: 13px;
+  font-weight: normal;
+  color: #000000;
+  font-family: 'Roboto', sans-serif;
+  line-height: 16px;
+}
+
+.modal-contentForImage .fileName {
+  float: right;
+  margin-top: 1.6em;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: 'Roboto', sans-serif;
+  color: #000000;
+  
+}
+
+.progressTrack {
+  width: 522px; 
+  height: 2px; 
+  background: rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.progressBar {
+  height: 2px;
+  width: 0; 
+  background: #26A69A;
+}
+
+#alert {
+  visibility: hidden;
+  min-width: 255px;
+  height: 38px;
+  margin-left: -160px;
+  background-color: #333333;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 10px;
+  position: fixed;
+  z-index: 9999;
+  left: 50%;
+  bottom: 40px;
+  border-radius: 5px;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.25);
+}
+
+#alert.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}
+
+
+#taskHistoryModal .modal-contentForTaskHistory {
+  background-color: #fefefe;
+  margin: auto;
+  margin-top:-15vh;
+  padding: 0;
+  border: 1px solid #888;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  width: 994px;
+  height: 733px;
+  border-radius: 10px;
+  /* overflow-y: hidden; */
+}
+
+#taskHistoryModal .taskHistoryModalSplit {
+  height:100%;
+  width:100%;
+  margin:0 auto;
+  border-radius: 10px;
+}
+
+#taskHistoryModal .taskHistorySide{
+  display:inline-block;
+  vertical-align:top;
+  background:#FAFAFA;
+  height:100%;
+  width:25%;
+  overflow-y: scroll; 
+  border-radius: 10px;
+  border-right: 1px solid transparent;
+}
+
+#taskHistoryModal .taskHistorySide:nth-child(2) {
+  background:#FFFFFF;
+  width:75%;
+  overflow-y: scroll;
+  border-radius: 10px;
+}
+
+#taskHistoryModal .taskHistorySide .singleTask{
+  padding: 20px 0px 0px 25px;
+}
+
+#taskHistoryModal .taskHistorySide .singleTask .header {
+  margin-left: -21px;
+  margin-top: -20px;
+  position: fixed;
+  padding: 16px;
+  background-color: white;
+  z-index: 3;
+  display: flex;
+  justify-content: space-between;
+  width: 735px;
+
+}
+
+#taskHistoryModal .taskHistorySide .singleTask .header h4 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: #26A69A;
+  margin-left: -5px;
+}
+
+#taskHistoryModal .taskHistorySide .singleTask .allTaskContainer {
+  padding: 10px 20px 20px 20px;
+  border-left: 1.5px solid rgba(51, 51, 51, 0.2);
+  margin-top: 25px;
+}
+
+#taskHistoryModal .taskHistorySide .singleTask .allTaskContainer .fa-circle {
+  margin-left: -29px;
+  margin-right: 12px;
+  color: #26A69A;
+}
+
+
+/* #taskHistoryModal .taskHistorySide .singleTask .allTaskContainer .goal_moved{
+  
+} */
+
+/* #taskHistoryModal .taskHistorySide .singleTask .allTaskContainer .goal_moved:nth-child(1) {
+  margin-top: 0px;
+} */
+
+#taskHistoryModal .taskHistorySide .singleTask .allTaskContainer .move_heading {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: rgba(0, 0, 0);
+  position: relative;
+}
+
+#taskHistoryModal .taskHistorySide .singleTask .allTaskContainer .goal_moved_head .label {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+#taskHistoryModal .taskHistorySide .singleTask .allTaskContainer .move_info .status_container {
+  /* border: 1px solid rgba(0, 0, 0, 0.1); */
+  width: 150px;
+  height: 40px;
+  margin-top: 5px;
+  margin-right: 10px;
+  display: inline-block;
+}
+
+#taskHistoryModal .taskHistorySide .singleTask .allTaskContainer .move_info .status_and_time {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.5);
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  padding-left: 4px;
+}
+
+#taskHistoryModal .taskHistorySide .singleTask .allTaskContainer .move_info .status_container p{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  border-left: 2px solid rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.9);
+  padding-left: 4px;
+  margin-top: -3px;
+}
+
+
+
+
+
+.ForMobile {
+  display: none;
+}
+
+@media (min-height: 900px) {
+  .modal-contentForNote, .modal-contentForTaskHistory {
+    margin-top: -10vh;
+  }
+}
+
+@media (max-width: 800px) {
+  .left {
+    width: 100%;
+  }
+
+  .right {
+    width: 0%
+  }
+}
+
+.notif {
+  margin-left: -14px;
+  margin-top: -13px;
+  font-size: 15px;
+}
+
+    
+@media (max-width: 412px) {
+  .col {
+    width: 100vw!important;
+    padding: 2em;
+    /* height: 82vh!important; */
+  }
+
+  #done {
+    margin-bottom: 2em;
+  }
+
+  #alert{
+    margin-left: -120px;
+  }
+
+  .modal-contentForTask {
+    border-radius: 5px;
+    background-color: #fefefe;
+    margin: auto;
+    padding: 0;
+    border: 1px solid #888;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.4s;
+    animation-name: animatetop;
+    animation-duration: 0.4s;
+    width: 343px;
+    height: 374px;
+    left: calc(50% - 343px/2);
+    top: 219px;
+  }
+
+  .insidemodalContentForTask, .insidemodalContentForNote {
+    width: 323px;
+    height: 211px;
+    margin-left: -7px;
+    top: 264px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    border-radius: 10px;
+    padding: 2px 5px;
+    font-size: 13px;
+    margin-top: 4px;
+  }
+
+  .insidemodalContentForNote {
+    width: 343px;
+    height: 128px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    box-sizing: border-box;
+    border-radius: 10px;
+    outline-color: transparent;
+    padding: 6px;
+    resize: none;
+  }
+
+  .close {
+    margin-top: -7px;
+  }
+
+  .addTbtn {
+    
+    font-weight: bold;
+    font-size: 12px;
+    font-family: SF;
+    color: black;
+    padding: 8px 36px;
+    background: #4DFFD4;
+    border-radius: 4px;
+    margin-top: -3em;
+  }
+
+  .submitTask, .submitNote {
+    margin-top: 10px;
+    margin-left: 5.5em;
+  }
+
+  .closebtn {
+      background: none;
+      font-size: 12px;
+      color: black;
+      font-weight: normal;
+      outline: none;
+      font-family: SF;
+      margin-top: 5em;
+      margin-left: -9em;
+  }
+
+  .modal-bodyForTask .addT {
+    color:#26A69A;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: 'Roboto', sans-serif;
+    /* margin-bottom: -2em; */
+  }
+
+  .modal-bodyForTask  {
+    margin-top: 1em;
+  }
+
+  #addTaskModal .modal-header {
+    display: none;
+  }
+
+  .ForMobile {
+    display: block;
+    font-size: 15px;
+  }
+
+  .tools {
+    display: inline-block;
+    margin-right: 12px!important;
+  }
+
+  .scrumtools n {
+    margin-right: 14px!important;
+  }
+
+  .openAddTaskModalBtn {
+    height: 35px;
+    left: 5%;
+    right: 86.11%;
+    bottom: 7%;
+    width: 140px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+
+
+  .openAddNoteModalbtn {
+    width: 33px;
+    left: 46%;
+    bottom: 7%;
+  }
+
+  .modal-contentForNote, .modal-contentForTaskHistory {
+    margin-top: -17vh;
+    width: 100vw;
+    height: 100vh;
+  }
+
+  .headerUserRole{
+    display: none;
+    
+  }
+
+  #addNoteModal .modal-header {
+    background: #26A69A;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    padding: 25px;
+  }
+
+  #addNoteModal .fa-arrow-left {
+    font-size: 20px;
+    color: white;
+    margin-top: -5px;
+  }
+
+  .userNoteHistory h2, h4, span {
+    font-size: 13px;
+  }
+
+  .userNoteHistory .tasks {
+    margin-top: 1em;
+  }
+
+  .insidemodalContentForImageUpload {
+    width: 323px;
+    height: 29px;
+    margin-top:15px;
+    padding-left: 16px;
+    padding-top: 4px;
+    margin-left: -6px;
+    font-size: 12px;
+    
+  }
+
+  .modal-contentForImage {
+    margin: auto;
+    margin-top:17vh;
+    /* margin-left: 15em; */
+    width: 343px;
+    height: 212px;
+    
+  }
+
+  .modal-contentForImage .addT {
+    margin-left: -6px;
+  }
+
+  .uploadImg {
+    margin-top: 4.5em;
+    margin-left: 100px;
+    margin-bottom: -1.5em;
+  }
+
+  .progressTrack {
+    width: 324px;
+    margin-left: -6px;
+  }
+
+  .modal-contentForImage .fileName {
+    float: left;
+    margin-top: 0.5em;
+    font-size: 12px;
+    margin-left: 9.5em;
+  }
+
+
+  .modal-contentForImage .icon-cancel {
+    font-size: 18px;
+  }
+
+  .modal-bodyForTask .close {
+    margin-top: -2em!important;
+    margin-right: -7px;
+  }
+
+}
+
+.teamTaskDropDownMenu {
+  left: 50px;
+  /* background: rgba(255, 76, 109, 0.1); */
+  padding-left: 9px;
+  margin-left: -3.1em;
+  border-radius: 10px 10px 0px 0px;
+  height: 55px;
+  width: 100%;
+  position: absolute;
+  margin-bottom: 1em;
+}
+
+.teamTaskDropDownMenuToggle {
+  height: 45px;
+  border-radius: 10px;
+}
+
+.teamTaskDropDownMenu img {
+  left: 60px;
+  margin-top: 10px;
+  border-radius: 50%;
+}
+
+.teamTaskDropDownMenu .teamTaskTitle {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 16px;
+}
+
+.teamTaskDropDownMenu .teamTaskTitle.firstOne {
+  color: #FF4D6D;
+}
+
+.teamTaskDropDownMenu .ttUserProfile {
+  list-style-type: none;
+  margin-left: 5px;
+  margin-top: -2em;
+  margin-left: -5px;
+}
+
+.teamTaskDropDownMenu .teamTaskTools{
+  list-style-type: none;
+  margin-left: 5px;
+  margin-left: -5px;
+  margin-top: -2.7em!important;
+}
+
+.teamTaskDropDownMenu .ttTasksandTime {
+  font-family:'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 12px;
+  color: #808080;
+}
+
+.teamTaskTools li{
+  display: inline;
+  color: white;
+}
+
+.teamTaskTools i {
+  padding: 7px;
+  margin-right: 10px;
+  border-radius: 5px;
+}
+
+.main #myTabContent #profile {
+  margin-top: -1.4em;
+}
+
+#profile .teamTaskTools {
+  margin-top: -3.1em;
+}
+
+#teamTaskDropDown {
+  position: relative;
+  margin-bottom: 2.5em;
+  width: 100%;
+  padding-left: 10px;
+}
+
+#sprintAlert .sprintAlert {
+  color: rgba(0, 0, 0, 0.7);
+  font-size: 14px;
+  visibility: hidden;
+}
+
+.sprintAlertVissible {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 2s linear;
+}
+
+.sprintAlertHidden {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s 0.3s, opacity 0.3s linear;
+}
+
+#sprintAlert bold {
+  color: rgba(0, 0, 0, 0.9);
+  font-size: 14px;
+  cursor: pointer;
+  margin-left: 3px;
+}
+
+.ttDropDownContent {
+  width: 100%;
+  margin-top: 2.8em;
+}
+
+summary::-webkit-details-marker {
+  background: none!important;
+  color: transparent!important;
+}
+
+summary::marker {
+  background: none!important;
+  color: transparent!important;
+}
+
+summary:focus {
+  border: 1px solid transparent;
+  outline: none !important;
+  -moz-appearance: none !important;
+}
+
+.showDropDown {
+  display: block;
+}
+
+.slackNotification{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  text-align: center;
+  margin-top: 25px;
+  
+
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.slackMessage {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-sizing: border-box;
+  border-radius: 10px;
+  left: 0px;
+  margin-top: 20px;
+
+}
+
+.slackMessage .chatUserName {
+  margin-top: 10px;
+}
+
+.slackMessage .chatUserName h5 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #4DFFD4;
+  position: absolute;
+  left: 65px;
+  top: 25px;
+}
+
+.slackMessage .userMsg {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 17px;
+  color: #FFFFFF;
+  margin-top: 12px;
+}
+
+.slackMessage .msgTime {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  align-items: center;
+  color: rgba(255, 255, 255, 0.2);
+  margin-top: 10px;
+  
+}
+
+.row{
+  vertical-align: bottom;
+}
+
+#inputSlackMsg {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  padding: 10px;
+  height: 10vh;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 10px;
+  color: white;
+  resize: none;
+  }
+  /*
+  #inputSlackMsg::focus {
+  border-color: none;
+  border: none;
+  } */
+  
+  #inputSlackMsg::placeholder {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  }
+  
+  #inputSlackMsg::-webkit-input-placeholder {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  }
+  
+  #inputSlackMsg:-ms-input-placeholder {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 16px;
+  color: rgba(255, 255, 255, 0.5);
+  }
+
+
+
+.slackMsgSection {
+  margin-top: 8em;
+  margin-left:0;
+  position: relative;
+  bottom:0;
+}
+
+.nav-tabs .nav-link {
+  width: 166px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 0px!important;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: #FFFFFF;
+  padding-top: 14px;
+  transition: 0.4s;
+  
+}
+
+
+.nav-tabs .nav-link.active {
+  background: rgba(255, 255, 255, 0.2);
+  border-top: 5px solid #4DFFD4;
+  padding-top: 9px!important;
+  color: #4DFFD4;
+}
+
+
+.nav-tabs .nav-link:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+#home-tab {
+  margin-left: 1.5em;
+}
+
+
+.nav-tabs .otherNavTools {
+  float: left;
+  width: 114px;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+}
+
+.nav-tabs #projectsTab {
+  margin-left: 110px;
+}
+
+
+.nav-tabs #themeTab {
+  width: 113px;
+}
+
+.nav-tabs #profileTab {
+  width: 179px;
+  border-right: 2px solid rgba(255, 255, 255, 0.3);
+  padding: unset;
+  cursor: pointer;
+}
+
+
+.nav-tabs #profileTab img{
+  float: left;
+  margin-top: 5px;
+}
+
+.nav-tabs #profileTab h4{
+  font-weight: 500;
+  font-size: 14px;
+  color: #FFFFFF;
+  position: relative;
+  margin-top: 8px;
+  float:left;
+  margin-left: 2px;
+  
+}
+
+.nav-tabs #profileTab p{
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #4DFFD4;
+  margin-left: 4.2em;
+  position: absolute;
+  margin-top: 2em;
+  
+}
+
+.nav-tabs #logoutTab {
+  width: 100px;
+  
+}
+
+.nav-tabs #logoutTab span{
+  font-size: 25px;
+  letter-spacing: 15px;
+  margin-left: 6px;
+  font-weight: 500;
+  transition: 0.1s;
+}
+
+
+.modal-contentForUserProfile {
+  background-color: #fefefe;
+  margin: auto;
+  margin-top:-16vh;
+  padding: 0;
+  border: 1px solid #888;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  -webkit-animation-name: animatetop;
+  -webkit-animation-duration: 0.4s;
+  animation-name: animatetop;
+  animation-duration: 0.4s;
+  width: 994px;
+  height: 833px;
+}
+
+.modal-contentForLogout {
+  position: relative;
+  width: 621px;
+  height: 115px;
+  left: calc(50% - 630px/2);
+  top: 29%;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin-left: -10px;
+  
+  animation:animatezoom 0.2s
+
+}
+
+@keyframes animatezoom {
+  from {transform:scale(0)}
+  to{transform:scale(1)}
+}
+
+.submitSignOutRequest {
+  margin-left: 174px;
+  margin-top: 15px;
+}
+
+.signOutText {
+  margin-left: 280px;
+  padding-top: 20px;
+}
+
+.signOutText > span {
+  font-family:'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #26A69A;
+}
+
+.modal-contentForAppInfo {
+  position: relative;
+  width: 621px;
+  height: 433px;
+  left: calc(50% - 630px/2);
+  top: 0px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin-top: 10px;
+  animation:animatezoom 0.2s
+}
+
+.modal-contentForAppInfo .appVersion {
+  margin-left: 205px;
+  padding-top: 32px;
+}
+
+.modal-contentForAppInfo .appVersion h3 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 21px;
+  color: #26A69A;
+  margin-left: 60px;
+  margin-top: 10px;
+  margin-bottom: -4px;
+}
+
+.modal-contentForAppInfo .appVersion span {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 13px;
+  color: #343434;
+  margin-left: 75px;
+}
+
+.modal-contentForAppInfo .newFeatures h4 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: #26A69A;
+  margin-bottom: 10px;
+}
+
+.modal-contentForAppInfo .newFeatures p, .newFeatures span {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: normal;
+  color: rgba(0, 0, 0, 0.9);
+  margin-bottom: -3px;
+}
+
+.modal-contentForAppInfo .newFeatures .NFSupport {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+.modal-contentForAppInfo .newFeatures span {
+  margin-bottom: unset;
+}
+
+.modal-contentForAppInfo .closeNewFeatureBtn {
+  margin-left: 247px;
+  font-family: SF;
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 17px;
+  color: rgba(0, 0, 0, 0.9);
+  width: 107px;
+  height: 38px;
+  cursor: pointer;
+  border: none;
+  background: none;
+  padding-top: 3em;
+  outline-color: white;
+  
+}
+
+.splitUPM {
+  height:100%;
+  width:100%;
+  margin:0 auto;
+}
+
+.splitUPMLeftt {
+  display:inline-block;
+  vertical-align:top;
+  background:#FAFAFA;
+  height:100%;
+  width:25%;
+  overflow-y: scroll;
+} 
+
+.splitUPMLeftt:nth-child(2) {
+  background:#FFFFFF;
+  width:75%;
+  overflow-y: scroll;
+  padding-top: 20px;
+}
+
+.splitUPMLeftt .splitUPMLeftHeader {
+  height: 42px;
+  background: rgb(237, 237, 237);
+  position: fixed;
+  width: 248px;
+
+}
+
+.splitUPMLeftt .splitUPMLeftHeader img {
+  margin-top: 9px;
+}
+
+.splitUPMLeftt .splitUPMLeftContent {
+  width: 212px;
+  height: 55px;
+  background: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  margin-top: 10px;
+  cursor: pointer;
+
+}
+.splitUPMLeftt .splitUPMLeftContent h5{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 12px;
+  line-height: 14px;
+  color: rgba(0, 0, 0, 0.9);
+  margin-top: 8px;
+  margin-bottom: -1px;
+}
+
+.splitUPMLeftt .splitUPMLeftContent span {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-left: unset;
+}
+
+.userHistories .userHistoryHead {
+  position: fixed;
+  display: inline-flex;
+  justify-content: space-between;
+  width: 720px;
+  background-color: white;
+  padding: 10px;
+  margin-top: -3.5em;
+
+}
+
+.userHistories .userHistoryHead h3 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  color: #26A69A;
+  margin-left: -10px;
+  margin-top: 10px;
+}
+
+.userHistories .userHistoryTasks {
+  margin-top: 40px;
+}
+
+.userHistories .userHistoryTasks .labelForWorkID, .userHistories .userHistoryTasks .labelForWorkIDStatus{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 5px;
+  margin-bottom: 0px;
+}
+
+
+.userHistories .userHistoryTasks .workID {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.userHistories .userHistoryTasks .status {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  margin-left: 10px;
+}
+
+.userHistories .userHistoryTasks .statusComplete {
+  color: #4DFFD4;
+}
+
+.userHistories .userHistoryTasks .statusNotCompleted {
+  color: #FF4D4D;
+}
+
+.userHistories .userHistoryTasks p {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  color: rgba(0, 0, 0, 0.8);
+  margin-top: 5px;
+}
+
+.navbarr .projectsDropDown h4, .navbarr #sprintTab h4, .navbarr #slackTab h4, .navbarr #themeTab h4 {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.9);
+  position: relative;
+  float:left;
+  margin-left: 2px;
+  margin-top: -5px;
+}
+
+.navbarr .projectsDropDown .loggedProject, .navbarr #sprintTab .loggedSprint, .navbarr #slackTab .slackStatus, .navbarr #themeTab .currentTheme {
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  margin-left: -5.2em;
+  margin-top: 12px;
+}
+
+.navbarr #sprintTab .loggedSprint, .navbarr #slackTab .slackStatus {
+  margin-left: -5.9em;
+}
+
+.projectsDropDown, .sprintDropDown, .themeDropDown {
+  position: relative;
+}
+
+.projectsDropDownContent, .sprintDropDownContent, .themeDropDownContent {
+  display: none;
+  position: absolute;
+  z-index: 2;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 0px 0px 5px 5px;
+  width: 114px;
+  cursor: default;
+  margin-top: 3.1em;
+  margin-left: 6.9em;
+}
+
+#themeTab .themeDropDownContent {
+  height: 93px;
+}
+
+#projectsTab .projectsDropDownContent {
+  min-height: 40px;
+}
+
+
+.sprintDropDown .sprintDropDownContent {
+  width: 244px;
+  max-height: 402px;
+  overflow-y: scroll;
+  margin-top: 3em;
+  margin-left: -1px;
+}
+
+.projectsDropDownContent p, .sprintDropDown .sprintDropDownContent p{
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: rgba(0, 0, 0, 0.2);
+  margin-left: 20px;
+  margin-top: 10px;
+  margin-bottom: -5px;
+}
+
+.themeDropDown .themeDropDownContent .imgContainer{
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-left: -10px;
+  margin-top: 5px;
+  padding-left: 2.5px;
+  padding-right: 2.5px;
+}
+
+.themeDropDown .themeDropDownContent .imgGrid{
+  margin-left: -18px;
+  margin-top: 5px;
+  margin-bottom: 3px;
+ 
+  
+}
+
+.themeDropDown .themeDropDownContent .imgBtm {
+  width: 18px;
+  margin-left: 18px;
+}
+
+
+.themeDropDown .themeDropDownContent .imgGrid img{ 
+  width: 30px;
+  height: 30px;
+}
+
+
+.themeDropDown .themeDropDownContent {
+  margin-top: 3em;
+  margin-left: -1px;
+  padding-left: unset;
+}
+
+.sprintDropDown .sprintDropDownContent p {
+  margin-bottom: -9px;
+}
+
+.sprintDropDown .sprintDropDownContent label {
+  color: rgba(0, 0, 0, 0.5);
+  margin-right: 5px;
+}
+
+.sprintDropDown .sprintDropDownContent p .spanAct {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.sprintDropDown .sprintDropDownContent p .activ {
+  color: rgba(0, 0, 0, 0.9);
+}
+
+.projectsDropDownContent .icon-check, .sprintDropDownContent .icon-check {
+  font-weight: bold;
+  color: #000;
+  padding-right: 3px;
+  margin-left: 2px;
+}
+
+.sprintDropDownContent .icon-check {
+  margin-left: -15px;
+}
+
+.projectsDropDownContent p:first-child {
+  color: rgba(0, 0, 0, 0.9);
+  font-weight: bold;
+  margin-left: 2px;
+}
+
+.projectsDropDownAP, .sprintDropDownCS {
+  border-radius: 0px 0px 5px 5px;
+  border-top: 2px solid rgba(0, 0, 0, 0.25);
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 9px;
+  text-align: center;
+  text-transform: uppercase;
+  color: #26A69A;
+  margin-top: 7px;
+  padding-top: 6px;
+  padding-bottom: 3px;
+  cursor: pointer;
+}
+
+.projectsDropDownContent p, .projectsDropDownAP, .sprintDropDownContent p, .sprintDropDownCS {
+  display: block;
+}
+
+.ppDD{
+  display: block;
+  animation: dropdown 0.4s;
+  animation-direction: alternate;
+}
+
+.spDD{
+  display: block;
+  animation: dropdown 1s;
+  animation-direction: alternate;
+}
+
+.animateDD {
+  animation: slideup 1s;
+  animation-direction: reverse;
+  
+}
+
+
+@keyframes dropdown {
+  0%  {margin-top: -500px;}
+  100%  {margin-top: 3.1em;}
+}
+
+@keyframes slideup {
+  0%  {margin-top: -500px;}
+  100%  {margin-top: 3.1em;}
+}
+
+@keyframes fadeInScrumTools {
+	0% {opacity: 0;}
+	100% {opacity: 1;}
+}
+@media screen and (max-width: 1300px) {.nav-tabs #logoutTab {max-width: 90px;}.nav-tabs #profileTab {max-width: 170px;}.nav-tabs #projectsTab {margin-left: 90px;} .nav-tabs .nav-link {max-width: 150px;} #home-tab {margin-left: 1.1em;} .nav-tabs .otherNavTools {max-width: 110px;} #themeDDContent {max-width: 110px;} .openAddNoteModalbtn {left: 14.5%;}}
+@media screen and (max-width: 1300px) {.nav-tabs #logoutTab {max-width: 100px;} #themeDDContent .imgContainer {margin-right: -5px;}   #themeDDContent .imgBtm{margin-left: 15px;} .themeDropDown .themeDropDownContent .imgGrid{margin-left: -12px;} .projectsDropDownContent {margin-left: 5.6em; width: 110px;} .ex .excontent .scrumtools span {font-size: 12px;} .ex .excontent .scrumtools i {font-size: 14px;}}
+
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 76, 109, 0.25);
+  background: #FFFFFF;
+  border-radius: 5px;
+  padding: 7px;
+  text-align: left;
+  font-family: 'Roboto', sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 13px;
+  line-height: 18px;
+  color: rgba(0, 0, 0, 0.9);
+  width:200px;
+  
+  transition:ease-in 0.3ms;
+}
+
+.example-list {
+  min-height: 150px;
+  background: transparent;
+  border-radius: 4px;
+  overflow: hidden;
+  display: block;
+}
+
+/* .example-list:hover {
+  min-height: 150px;
+} */
+
+.cdk-drop-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.dragged_item_placeholder {
+  width: 200px;
+  height: 106px;
+  text-align: center;
+  line-height: 111px;
+  background: linear-gradient(to right, #C4C4C4 50%, rgba(255, 255, 255, 0) 0%), linear-gradient(#C4C4C4 50%, rgba(255, 255, 255, 0) 0%), linear-gradient(to right, #C4C4C4 50%, rgba(255, 255, 255, 0) 0%), linear-gradient(#C4C4C4 50%, rgba(255, 255, 255, 0) 0%);
+  background-position: top, right, bottom, left;
+  background-repeat: repeat-x, repeat-y;
+  background-size: 16px 3px, 3px 16px;
+  border-radius: 10px;
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  margin-bottom: 15px;
+  margin-left: 10px;
+}
+
+.projectsDropDownContent .switch {
+  position: relative;
+  display: inline-block;
+  width: 20px;
+  height: 11px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.projectsDropDownContent .switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.projectsDropDownContent .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0,0,0,1);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.projectsDropDownContent .slider:before {
+  position: absolute;
+  content: "";
+  height: 7px;
+  width: 7px;
+  left: 1.5px;
+  bottom: 2px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.projectsDropDownContent input:checked + .slider {
+  background-color: rgba(0,0,0,1);
+}
+
+.projectsDropDownContent input:focus + .slider {
+  box-shadow: 0 0 1px white;
+}
+
+.projectsDropDownContent input:checked + .slider:before {
+  -webkit-transform: translateX(9px);
+  -ms-transform: translateX(9px);
+  transform: translateX(9px);
+}
+
+.projectsDropDownContent .slider.round {
+  border-radius: 34px;
+}
+
+.projectsDropDownContent .slider.round:before {
+  border-radius: 50%;
+}
+
+.slackChat .chatProfilePicture {
+  width: 35px;
+  border-radius: 50%;
+  border: 1px solid white;
+  margin-top: 10px;
+}
+
+
+.modalforslack {
+  display:none;
+  left:0;
+  top:0;
+  z-index:1;
+  position:fixed;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration:0.6s;
+  animation-name: slideIn;
+  animation-duration: 0.6s;
+  height:100%;
+  width:100%;
+  overflow: auto;
+  align-self: center;
+  
+  
+  
+
+ }
+
+
+ .slackmodal-content{
+     position: relative;
+     background-color: white;
+     margin:15% auto;
+     width:30%;
+     border: 1px solid transparent;
+     border-radius: 12px;
+     -webkit-animation-name: slideIn;
+     -webkit-animation-duration:0.6s;
+     animation-name: slideIn;
+     animation-duration: 0.6s;
+     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+     line-height: 1.6em;
+     
+
+ }
+ .slackmodal-header{
+      justify-content: space-around;
+     background:#693b58;
+     color:black;
+     padding:5px 16px;
+     margin: auto;
+ }
+
+ .slackmodal-header h4 {
+     margin:0;
+     padding-bottom:5px;
+     text-align: center;
+     color:white;
+ }
+
+ .slackmodal-footer {
+
+     color: white;
+     width:60%;
+     margin: 20px auto;
+     
+ }
+
+ .slackmodal-body{
+     padding:15px ;
+     margin: 5px auto;
+     text-align: center;
+ }
+ .slackbtn {
+     background-color: #6ec4cb;
+     border-radius:8px;
+     margin-left:25px;
+     color: black;
+     padding: 5px auto;
+     text-align:center;
+     width:150px;
+     
+ }
+
+ .slackbtn p {
+  margin:10px 10px;
+ }
+
+ .slackbtn:hover, .slackbtn:focus {
+   cursor: pointer;
+ }
+
+ .slackclose{
+      font-size: 18px;
+     float:right;
+     padding-top :5px ;
+     padding-right:5px;
+     color:white;
+ }
+ .slackclose:hover, .slackclose:focus{
+     color:black;
+     cursor: pointer;
+ }
+
+ @-webkit-keyframes slideIn {
+ from {bottom: -300px; opacity: 0} 
+ to {bottom: 0; opacity: 1}
+ }
+
+ @keyframes slideIn {
+ from {bottom: -300px; opacity: 0}
+ to {bottom: 0; opacity: 1}
+ }
+
+ @-webkit-keyframes fadeIn {
+ from {opacity: 0} 
+ to {opacity: 1}
+ }
+
+ @keyframes fadeIn {
+ from {opacity: 0} 
+ to {opacity: 1}
+ }
+
+ /* styles for websockets chat */
+
+ .form-container {
+  width: 100%;
+  padding: 0;
+  background-color: #fff
+}
+textarea {
+  resize: none;
+  outline: none;
+}
+
+body,html{
+  height: 100%;
+  margin: 0;
+  background: #7F7FD5;
+  background: -webkit-linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+  background: linear-gradient(to right, #91EAE4, #86A8E7, #7F7FD5);
+}
+
+.chat{
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.card{
+  width: 25%;
+  border-radius: 0px !important;
+  background-color: rgba(0,0,0,0.4) !important;
+  position: absolute;
+  height: 95vh;
+  right: 0;
+}
+.msg_card_body{
+  height: 10px;
+  overflow-y: auto;
+}
+.card-header{
+  border-radius: 15px 15px 0 0 !important;
+  border-bottom: 0 !important;
+}
+.card-footer{
+  border-radius: 0 0 15px 15px !important;
+  border-top: 0 !important;
+}
+.type_msg{
+  background-color: rgba(0,0,0,0.3) !important;
+  border:0 !important;
+  color:white !important;
+  height: 100px !important;
+  overflow-y: auto;
+}
+.send_btn{
+  border-radius: 0 15px 15px 0 !important;
+  background-color: rgba(0,0,0,0.3) !important;
+  border:0 !important;
+  color: white !important;
+  cursor: pointer;
+}
+.user_img_msg{
+  height: 40px;
+  width: 40px;
+  border:1.5px solid #f5f6fa;
+
+}
+.img_cont_msg{
+  height: 40px;
+  width: 40px;
+}
+.user_info{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-left: 15px;
+}
+.user_info span{
+  font-size: 20px;
+  color: white;
+}
+.user_info p{   
+  font-size: 10px;
+  color: rgba(255,255,255,0.6);
+}
+.msg_container{
+  margin-top:auto;
+  margin-bottom: auto;
+  margin-left: 2px;
+  border-radius: 20px;
+  background-color: #82ccdd;
+  padding: 8px;
+  position: relative;
+}
+.msg_container_send{
+  margin-top: auto;
+  margin-bottom: auto;
+  margin-right: 10px;
+  border-radius: 25px;
+  background-color: #78e08f;
+  padding: 8px;
+  position: relative;
+}
+.msg_time{
+  position: absolute;
+  left: 0;
+  bottom: -15px;
+  color: rgba(255,255,255,0.5);
+  font-size: 10px;
+}
+.msg_time_send{
+  position: absolute;
+  right:0;
+  bottom: -15px;
+  color: rgba(255,255,255,0.5);
+  font-size: 10px;
+}
+.msg_head{
+  position: relative;
+}
+
+/* styles for websockets chat end */

@@ -1,0 +1,1344 @@
+<div class="preloader">
+  <img src="https://res.cloudinary.com/ros4eva/image/upload/v1576318446/Mac_h5coln.svg" id="loadrImg">
+  <!-- <img src="https://res.cloudinary.com/ros4eva/image/upload/v1576318445/images_iii9fe.png" id="mloadrImg" width="330" height="74"> -->
+
+</div>
+<div class="page-content ">
+  <div class="container-fluid">
+    <div class="row">
+      <nav>
+        <div class="navbarr">
+          <a class="navbar-brand" href="/home"><img
+              src="https://res.cloudinary.com/ros4eva/image/upload/v1576318445/images_iii9fe.png"
+              style="width: 116px; height: 26px;"></a>
+          <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+            <li class="nav-item">
+              <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+                aria-selected="false" (click)="showAddTaskandNoteBTN();">My Tasks</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+                aria-selected="true" (click)="hideAddTaskandNoteBTN();">Team Tasks</a>
+            </li>
+    
+            <li class="nav-item">
+              <div class="projectsDropDown" (click)="showProjectTabContents()">
+                <a class="nav-link otherNavTools" id="projectsTab" role="tab">
+                  <h4>Project</h4>
+                  <span class="loggedProject">{{loggedProject}}</span>
+                </a>
+    
+                <div id="projectsDDContent" class="projectsDropDownContent">
+                  <p><span class="icon-check"></span>{{loggedProject}}</p>
+                  <p class="clear_tft" style="padding-left: 5px;" [hidden]="loggedUserRole != 'Owner'">Auto Clear <bold style="font-weight: bold;">TFT</bold></p>
+                  <p style="padding-left: 5px; font-size: 12px;" [hidden]="loggedUserRole != 'Owner'">off<label class="switch">
+                    <input id="auto_clear_tft" type="checkbox" (click)="autoClearTft()">
+                    <span class="slider round"></span>
+                  </label>on</p>
+                  <div class="projectsDropDownAP" (click)="createNewProject()">
+                    ADD PROJECT
+                  </div>
+                </div>
+              </div>
+    
+            </li>
+    
+            <li class="nav-item">
+              <div class="sprintDropDown" (click)="showSprintTabContents()">
+                <a class="nav-link otherNavTools" id="sprintTab" role="tab">
+                  <h4>Sprint {{loggedSprint['sprintID']}}</h4>
+                  <span class="loggedSprint">{{loggedSprint['dateCreated']| date: 'MMM dd'}} -
+                    {{loggedSprint['endDate']| date:'MMM dd'}}</span>
+                </a>
+    
+                <div id="sprintDDContent" class="sprintDropDownContent">
+                  <p><span class="icon-check"></span><label class="activ"
+                      *ngIf="loggedSprint['sprintID'] != undefined && loggedSprint['sprintID'] != ' '">Sprint
+                      {{loggedSprint['sprintID']}}:</label><span class="spanAct">{{loggedSprint['dateCreated']| date}} -
+                      {{loggedSprint['endDate'] | date}}</span></p>
+                  <p #selectSprint *ngFor="let sprint of currentSprint" [attr.sprintID]="sprint['sprintID']"
+                    (click)="changeLoggedSprint(selectSprint, sprintCreateDate, sprintEndDate)"><label #sprintCreateDate
+                      [attr.sprint-create-date]="sprint['dateCreated']">Sprint {{sprint['sprintID']}}:</label><span
+                      #sprintEndDate [attr.sprint-end-date]="sprint['endDate']">{{sprint['dateCreated'] | date}} -
+                      {{sprint['endDate'] | date}}</span></p>
+                  <div class="sprintDropDownCS" id="createSprint" (click)="startNewSprint()">
+                    NEW SPRINT
+                  </div>
+                </div>
+              </div>
+            </li>
+    
+            <div *ngIf = "uses_slack == 'true' ">
+              <li class="nav-item">
+                <a class="nav-link otherNavTools" id="slackTab" role="tab" (click)="connectSlack()">
+                  <h4>Slack <img src="https://res.cloudinary.com/ros4eva/image/upload/v1582046655/Group_jinais.png" width="12"
+                      height="12"></h4>
+                  <span class="slackStatus">Connected</span>
+                </a>
+              </li>
+            </div>
+            <div *ngIf = "uses_slack == 'false' ">
+              <li class="nav-item" >
+                <a class="nav-link otherNavTools" id="slackTab" role="tab" (click)="connectSlack()">
+                  <h4>Slack <img src="https://res.cloudinary.com/ros4eva/image/upload/v1582046655/Group_jinais.png" width="12"
+                    height="12"></h4> 
+                  <span class="slackStatus text-danger">Not Connected !</span>
+                </a>
+              </li>
+            </div>
+    
+    
+            <li class="nav-item">
+              <div class="themeDropDown" (click)="selectThemeTabContents()">
+                <a class="nav-link otherNavTools" id="themeTab" role="tab">
+                  <h4>Theme</h4>
+                  <span class="currentTheme" id="currentTheme"></span>
+                </a>
+    
+                <div id="themeDDContent" class="themeDropDownContent">
+                  <div class="imgContainer">
+                    <div class="imgBtm">
+                      <div class="imgGrid" id="plainTheme"><img
+                          src="https://res.cloudinary.com/ros4eva/image/upload/v1582123620/Group_2_ln6kmn.png"
+                          (click)="useDefaultTheme('theme')" alt="Plain Theme" title="Plain Theme" class="themeImg"></div>
+                    </div>
+                    <div class="imgBtm">
+                      <div class="imgGrid" id="automobileTheme"><img
+                          src="https://res.cloudinary.com/ros4eva/image/upload/v1582123545/Rectangle_3_ozeffe.png"
+                          (click)="useDefaultTheme('theme1')" alt="Automobile Theme" title="Automobile Theme"
+                          class="themeImg"></div>
+                    </div>
+                    <div class="imgBtm">
+                      <div class="imgGrid" id="darkCloudTheme"><img
+                          src="https://res.cloudinary.com/ros4eva/image/upload/v1582123544/Rectangle_3.1_mz3gr1.png"
+                          (click)="useDefaultTheme('theme2')" alt="Dark Clound Theme" title="Dark Cloud Theme"
+                          class="themeImg"></div>
+                    </div>
+                    <div class="imgBtm">
+                      <div class="imgGrid" id="landmarkTheme"><img
+                          src="https://res.cloudinary.com/ros4eva/image/upload/v1582123544/Rectangle_3.3_bhbayg.png"
+                          (click)="useDefaultTheme('theme3')" alt="Landmark Theme" title="Landmark Theme" class="themeImg">
+                      </div>
+                    </div>
+                    <div class="imgBtm">
+                      <div class="imgGrid" id="cityviewTheme"><img
+                          src="https://res.cloudinary.com/ros4eva/image/upload/v1582123544/Rectangle_3.4_sh4f7a.png"
+                          (click)="useDefaultTheme('theme4')" alt="City View Theme" title="City View Theme"
+                          class="themeImg"></div>
+                    </div>
+                    <div class="imgBtm">
+                      <div class="imgGrid" id="blueskyTheme"><img
+                          src="https://res.cloudinary.com/ros4eva/image/upload/v1582123544/Rectangle_3.5_z9lfmx.png"
+                          (click)="useDefaultTheme('theme5')" alt="Blue Sky Theme" title="Blue Sky Theme" class="themeImg">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </li>
+    
+            <li class="nav-item">
+              <a class="nav-link" id="profileTab" role="tab" (click)="userProfileModal(addToUser, loggedUser, loggedUserRole);hideslackchat()">
+                <img src="https://res.cloudinary.com/ros4eva/image/upload/v1581678144/Ellipse_6_z5snsi.png">
+                <h4>{{loggedUserProfile}}</h4>
+                <p>{{loggedUserRole}}</p>
+              </a>
+            </li>
+    
+            <li class="nav-item">
+              <a class="nav-link" id="logoutTab" role="tab">
+                <span class="icon-info-circle" (click)="appInfo()"></span>
+                <span class="icon-Logout" (click)="logoutModal()"></span>
+              </a>
+            </li>
+          </ul>
+    
+    
+        </div>
+    
+      </nav>
+    </div>
+  </div>
+  
+
+  <div class="main ml-0 pl-0">
+    <div class="container-fluid pr-0">
+      <div class="row row-eq-height">
+        <div class="splitleft col-md-9 pr-0 pl-0" id="splitLeft">
+          <span id="alert"></span>
+    
+          <div class="tab-content card-body" id="myTabContent" style="position: relative;">
+            <!-- <div>Modal Box Start Here</div> -->
+            <div class="openModalForTaskandNote">
+              <button id="addTaskBtn" class="btn openAddTaskModalBtn">ADD TASK</button>
+              <button id="addNoteBtn" class="btn openAddNoteModalbtn" (click)="hideslackchat()"><span
+                  class="icon-Group-1"></span></button>
+            </div>
+    
+            <!-- <div>Modal Box For Adding Task </div> -->
+            <div id="addTaskModal" class="modal">
+              <div class="modal-contentForTask">
+                <div class="modal-header" style="margin-bottom: 7px;">
+                  <img src="https://res.cloudinary.com/ros4eva/image/upload/v1576618715/Ellipse_cxegyr.svg"><br>
+                  <span class="headerUserTitle">{{loggedUser}}</span>
+                  <p class="headerUserRole">
+                    {{loggedUserRole}}</p>
+                  <span class="close " (click)="close()"><span class="icon-cancel"></span></span>
+    
+                </div>
+                <div class="modal-bodyForTask">
+                  <form name="addTaskForm" id="addTaskForm" (ngSubmit)="submitAddTask()">
+                    <span class="close ForMobile" (click)="close()"><span class="icon-cancel"></span></span>
+                    <span class="addT">Add A Task</span>
+                    <textarea #taskToAdd="ngModel" class="insidemodalContentForTask" name="goal_name"
+                      [(ngModel)]="goal_name" required></textarea>
+                    <div class="submitTask">
+                      <button type="submit" id="submitaddTaskBtn" class="btn addTbtn">ADD TASK</button>
+                      <span class="btn closebtn" id="cancelAddTaskBtn" style="font-weight: bold;"
+                        (click)="close()">CANCEL</span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <!---<div>Modal box for connecting to slack</div>-->
+            <div class="modalforslack" id="slackModal">
+              <div class="slackmodal-content">
+                  <div class="slackmodal-header">
+                    <span class="slackclose" (click)="closeSlackModal()">&times;</span>
+                    <h4><img src="https://res.cloudinary.com/ros4eva/image/upload/v1582046655/Group_jinais.png" width="18"
+                      height="15"> Slack Integration </h4>
+                      
+                      
+                      
+                  </div>
+                  <div class="slackmodal-body">
+                      <p>Slack is not yet integrated. You won't be able to send messages. Would you like to integrate slack now?</p>
+                  </div>
+                  <div class="slackmodal-footer d-flex justify-content-around">
+                      <button class="button btn" (click)="closeSlackModal()">Cancel</button>
+                      <span class="slackbtn btn-md" (click)="connectSlack()" width="20"><p>Connect to Slack</p></span>
+                  </div>
+                  
+              </div>
+          </div>
+    
+            <!-- <div>Modal Box For Adding Notes</div> -->
+    
+            <div id="addNoteModal" class="modal">
+              <div class="modal-contentForNote">
+                <div class="splitNoteModal upside">
+                  <div class="modal-header" style="margin-bottom: 5px;">
+                    <i class="fas fa-arrow-left ForMobile" (click)="close()"></i>
+                    <img style="margin-top: -5px; width: 24px;" src="https://res.cloudinary.com/ros4eva/image/upload/v1576618715/Ellipse_cxegyr.svg"><br>
+                    <span class="headerUserTitle">{{loggedUser}}</span>
+                    <p class="headerUserRole">{{loggedUserRole}}</p>
+                    <span (click)="close()" class="icon-cancel close" style="font-size: 26px; margin-top: -22px;"></span>
+                  </div>
+    
+                  <div style="padding: 0px 12px; padding-left: 20px;">
+                    <span class="addT addNT">Add Notes</span>
+                    <form #addNoteForm name="addNote" id="addNote" (ngSubmit)="addNote()">
+                      <textarea #noteToAdd="ngModel" [(ngModel)]="note_to_add" name="noteToAdd"
+                        class="insidemodalContentForNote" style="margin-bottom: 15px;">
+    
+                                        </textarea>
+                      <div class="addT" style="margin-top: 0px;">
+                        <span>Set Priority</span>
+                      </div>
+                      <div class="priorityI" style="margin-top: 5px;">
+                        <input type="radio" #priority="ngModel" name="priority" [(ngModel)]="notePriority" value="high">
+                        <span>High</span>
+                        <input type="radio" #priority="ngModel" name="priority" [(ngModel)]="notePriority"
+                          value="medium"><span>Medium</span>
+                        <input type="radio" #priority="ngModel" name="priority" [(ngModel)]="notePriority"
+                          value="low"><span>Low</span>
+                      </div>
+    
+                      <div class="submitNote" style="margin-bottom: 12px; margin-top: -15px;">
+                        <button type="submit" id="addNoteBtn" class="btn addTbtn">ADD NOTE</button>
+                        <span class="btn closebtn" id="cancelAddNote" style="font-weight: bold;"
+                          (click)="close()">CANCEL</span>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="splitNoteModal downside">
+                  <div style="padding: 0px 16px 2px 16px; background-color: white;">
+                    <div class="userNoteHistory">
+                      <div class="addT" style="position: fixed;margin-left: -10px;  background-color: white; padding: 12px; width: 50%;">
+                        <span class="addN">All Notes</span>
+                      </div>
+                      <div style="padding: 10px;"></div>
+                      <div *ngFor="let note of notes">
+                        <div *ngIf="note['noteFor'] == addToUser">
+                          <div class="tasks" style="margin-top: 15px;">
+                            <span class="h2">ID: </span><span class="h4">{{note['noteID']}}</span>
+                            <br><span>{{note['note']}}</span>
+                            <br><span #addNoteToTask [attr.note_to_task]="note['note']" [attr.note_id]="note['noteID']"
+                              (click)="addNoteToUserTask(addNoteToTask)" style="font-weight: bold; cursor: pointer;"><i
+                                class="fas fa-plus" style="font-weight: bolder; font-size: 16px; margin-right: 5px;"></i>
+                              Add To
+                              Tasks</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- <div>Modal For Task Edit</div> -->
+            <div id="editTaskModal" class="modal">
+              <div class="modal-contentForTask">
+                <div class="modal-header">
+                  <img src="https://res.cloudinary.com/ros4eva/image/upload/v1576618715/Ellipse_cxegyr.svg"><br>
+                  <span class="headerUserTitle">{{loggedUser}}</span>
+                  <p class="headerUserRole">
+                    {{loggedUserRole}}</p>
+                  <span class="close" (click)="close()"><span class="icon-cancel"></span></span>
+    
+                </div>
+                <div class="modal-bodyForTask">
+                  <form #editTaskForm name="editTask" id="editUserTask" (ngSubmit)="editTask()">
+                    <span class="addT">Edit Task</span>
+                    <textarea class="insidemodalContentForTask" #taskToEditModel="ngModel" aria-valuetext="taskToEdit"
+                      name="taskToEdit" [(ngModel)]="taskToEdit">
+                                    </textarea>
+                    <div class="submitTask">
+                      <button type="submit" id="editTaskBtn" class="btn addTbtn">EDIT
+                        TASK</button>
+                      <span class="btn closebtn" id="cancelAddTaskBtn" style="font-weight: bold;"
+                        (click)="close()">CANCEL</span>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+    
+            <!-- <div>Modal For Task Image Upload</div> -->
+            <div id="uploadImageModal" class="modal">
+              <div class="modal-contentForImage">
+                <div class="modal-bodyForTask">
+                  <div class="imgTop" style="margin-top: 1em;">
+                    <span class="addT">Upload Image</span>
+                    <span class="close" (click)="close()" style="margin-top: -8px;"><span class="icon-cancel"></span></span>
+                  </div>
+                  <form name="uploadImage" id="uploadImage" (ngSubmit)="imageUploadAlert()">
+                    <label for="imgUpload" class="insidemodalContentForImageUpload">
+                      <span class="imgMsg">{{imgName}}</span>
+                    </label>
+                    <div class="fileName">CHOOSE FILE</div>
+                    <input type="file" name="image_uploaded" id="imgUpload" accept="image/*" (change)="imageName()">
+                    <div class="uploadImg">
+                      <button type="submit" id="uploadImageBtn" class="btn addTbtn">UPLOAD</button>
+                    </div>
+    
+                    <div class="progressTrack">
+                      <div id="progressBar" class="progressBar"></div>
+                    </div>
+                  </form>
+    
+                </div>
+              </div>
+            </div>
+    
+            <!-- <div>Modal Box For Task History</div> -->
+    
+            <div id="taskHistoryModal" class="modal">
+              <div class="modal-contentForTaskHistory">
+                <div class="taskHistoryModalSplit">
+                  <div class="taskHistorySide">
+                    <div class="container" style="padding: 20px;">
+                      <div *ngFor="let historyFor of history_for">
+                        <div *ngIf="historyFor">
+                          <div class="ex_taskHistory">
+                            <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 10px;">
+                              <div class="task_text">
+                                {{historyFor['history']}}
+                              </div><br>
+                              <div class="uploadedImage" *ngIf="historyFor['file'];">
+                                <img #viewClickedImage [attr.image_to_view]="'image' + historyFor['historyProjectID']"
+                                  src="{{dataService.imageApi}}{{historyFor['file']}}"
+                                  (click)="userImageModal(viewClickedImage); hideslackchat()">
+                              </div>
+                              <div class="scrumtools">
+                                <n style="margin-right: 8px;">{{historyFor['historyProjectID']}}</n>
+                                <span class="icon-pencil tools" alt="edit" title="edit"></span>
+                                <span class="icon-camera tools" alt="upload image" title="upload image"></span><i class="fas fa-clone tools"
+                                  alt="copy" title="copy" style="font-size: 15px;"></i>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+    
+                  <div class="taskHistorySide">
+                    <div class="container singleTask">
+                      <div class="header">
+                        <h4>Single Task History</h4>
+                        <span class="close" (click)="close()" style="margin-right: -10px; margin-top: -10px;"><span style="font-size: 25px;" class="icon-cancel"></span></span>
+                      </div>
+                      <div class="allTaskContainer">
+                        <div *ngFor="let history of goal_history">
+                          <div *ngIf="history">
+                            <div class="goal_moved">
+                              <div class="goal_moved_head">
+                                <i class="fas fa-circle"></i><span class="move_heading">{{history['historyMessage']}}</span><br>
+                                <label class="label">By</label><span class="label" style="color: #26A69A;">
+                                  {{history['historyMovedBy']}}</span>
+                              </div>
+                              <div class="move_info" style="margin-top: 15px; margin-bottom: 40px;">
+                                <div class="move_status status_container">
+                                  <span class="status_and_time">Status</span>
+                                  <p>{{history['historyStatus']}}</p>
+                                </div>
+                            
+                                <div class="move_status status_container">
+                                  <span class="status_and_time">Hours</span>
+                                  <p>{{history['historyHours']}}</p>
+                                </div>
+                            
+                                <div class="move_status status_container">
+                                  <span class="status_and_time">Date</span>
+                                  <p>{{history['timeCreated'] | date: 'MMMM dd, yyyy'}}</p>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+    
+                        <!-- <div style="padding: 10px;"></div> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+    
+            <!-- <div>Modal Box For User Profile</div> -->
+    
+            <div id="userProfileModal" class="modal">
+              <div class="modal-contentForUserProfile">
+                <div class="splitUPM">
+                  <div class="splitUPMLeftt">
+                    <div class="splitUPMLeftHeader">
+                      <div class="container">
+                        <img src="https://res.cloudinary.com/ros4eva/image/upload/v1581554201/Ellipse_5_rzifrh.png"
+                          width="22" height="22">
+                        <span class="headerUserTitle">{{historyForUser}}</span>
+                        <p class="headerUserRole">
+                          {{historyForUserRole}}</p>
+                      </div>
+                    </div>
+                    <div class="container">
+                      <div style="padding:25px;"></div>
+                      <div *ngFor="let userSprint of currentSprint">
+                        <div *ngIf="userSprint">
+                          <div class="splitUPMLeftContent">
+                            <div class="container" (click)="userTaskHistoryForSprint(userSprint['sprintID'], addToUser)">
+                              <h5>Sprint {{userSprint['sprintID']}}:</h5>
+                              <span>{{userSprint['dateCreated']| date: 'MMM dd, yyy'}} -
+                                {{userSprint['endDate']| date:'MMM dd, yyy'}}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div style="padding: 10px"></div>
+                    </div>
+                  </div>
+                  <div class="splitUPMLeftt">
+                    <div class="container">
+                      <div class="userHistories">
+                        <div class="userHistoryHead">
+                          <h3>User Task Histories</h3>
+                          <span style="font-size: 28px; margin-right: -5px;" (click)="close()" class="icon-cancel"></span>
+                        </div>
+                        <div *ngFor="let thisSprintTask of clicked_task_history">
+                          <div *ngIf="thisSprintTask">
+                            <div class="userHistoryTasks">
+                              <div>
+                                <span class="labelForWorkID">Work ID: </span>
+                                <span class="workID" *ngIf="thisSprintTask['pushID'] != 'Null Value'">{{thisSprintTask['pushID']}}</span>
+                                <span class="workID" *ngIf="thisSprintTask['pushID'] == 'Null Value'">None</span>
+                              </div>
+                              <div style="margin-top: -7px!important;">
+                                <span class="labelForWorkIDStatus">Status: </span><span class="status statusNotCompleted" *ngIf="thisSprintTask['status'] != '3'" style="color: #FF4D4D;">Not
+                                  Completed</span><span class="status statusNotCompleted" *ngIf="thisSprintTask['status'] == '3'" style="color:#4DFFD4;">Completed</span>
+                                
+                              </div>
+                              <p>{{thisSprintTask['task']}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+    
+              </div>
+            </div>
+    
+            <!-- <div>Modal Box For App Info</div> -->
+    
+            <div id="appInfoModal" class="modal">
+              <div class="modal-contentForAppInfo">
+                <span class="close" (click)="close()" style="margin: 10px;"><span class="icon-cancel"></span></span>
+                <div class="container">
+                  <div class="appVersion">
+                    <img src="https://res.cloudinary.com/ros4eva/image/upload/v1581797659/Rectangle_3_zphwex.png">
+                    <h3>ChatScrum</h3>
+                    <span>v1.2.0012</span>
+    
+                  </div>
+                  <div class="newFeatures">
+                    <h4>New Features</h4>
+                    <p>- Sea cattle.</p>
+                    <p>- The moving together there don't two night our midst</p>
+                    <p>- Behold there fill brought tree rule there from firmament night be female.</p>
+                    <p>- Firmament he replenish third fruit</p>
+                    <p>- Him there grass beast. Very wherein.</p>
+                    <p>- Hath, them.</p>
+                    <p>- Seas grass shall form had divide.</p>
+                    <h4 class="NFSupport">Support</h4>
+                    <span>For support, send a mail to info@linuxjobber.com</span>
+                  </div>
+                  <button class="closeNewFeatureBtn" (click)="close()">CLOSE</button>
+                </div>
+              </div>
+            </div>
+    
+            <!-- <div>Modal Box For Logout</div> -->
+    
+            <div id="logoutModal" class="modal">
+              <div class="modal-contentForLogout">
+                <span class="close" (click)="close()" style="margin: 10px;"><span class="icon-cancel"></span></span>
+    
+                <div class="signOutText">
+                  <span>Sign Out?</span>
+                </div>
+                <div class="submitSignOutRequest">
+                  <button type="button" id="signOutBtn" class="btn addTbtn" style="font-size: 14px;" (click)="logout()">SIGN
+                    OUT
+                  </button>
+                  <button class="btn closebtn" id="cancelsignOutBtn" style="font-weight: bold;"
+                    (click)="close()">CANCEL</button>
+                </div>
+    
+              </div>
+            </div>
+    
+            <!--Modal Box For Upload Image View-->
+    
+            <div id="uploadedImageModal" class="image_modal">
+              <img class="modal-contentuploadedImage" id="imageToView">
+            </div>
+    
+            <!-- Modal Box For Push Id -->
+            <div id="dialog" title="Please Confirm?" >
+              <div class="container">
+                <form #push_id_form="ngForm" (ngSubmit)="processMoveGoalRequest(); closeDialog()">
+                  <label for="push_id"
+                    style="font-size: 12px; color: rgba(0, 0, 0, 0.8); font-family: 'roboto' sans-serif; margin-bottom: -5px; margin-top: -5px;">Push
+                    ID:</label>
+                  <input maxlength="10" #push_id_for_verify="ngModel" [(ngModel)]="push_id" type="text" name="push_id"
+                    style="width: 100%; padding: 3px 14px; border-radius: 4px; border: 1px solid transparent; background-color: rgba(0, 0, 0, 0.1); outline-color:transparent; font-size: 14px;">
+                  <small style="color: rgba(0, 0, 0, 0.4); font-size: 12px;" *ngIf="push_id_form.value['push_id']">Max 10
+                    Characters: {{push_id_form.value['push_id'].length || 0}}/10</small>
+                  <br>
+                  <label for="hours"
+                    style="font-size: 12px; color: rgba(0, 0, 0, 0.8); font-family: 'roboto' sans-serif; margin-bottom: -5px;">Hours
+                    Spent:</label>
+                  <input type="number" name="hours" [(ngModel)]="hours"
+                    style="width: 100%; padding: 3px 14px; border-radius: 4px; border: 1px solid transparent; background-color: rgba(0, 0, 0, 0.1); outline-color: transparent; font-size: 14px;">
+                  <button type="submit"
+                    style="padding: 4px 7px; border: none; background: rgba(0, 0, 0, 0.1); margin-top: 5px; font-size: 12px; outline-color: rgba(0, 0, 0, 0.1); border-radius: 4px;">Move
+                    Goal</button>
+                </form>
+            
+              </div>
+            </div>
+    
+            <!-- Modal Box For Changing User Role -->
+    
+            <div id="changeUserRoleModal" class="modal">
+              <div class="modal-contentForTask">
+                <div class="modal-header" style="margin-bottom: 7px;">
+                  <img src="https://res.cloudinary.com/ros4eva/image/upload/v1576618715/Ellipse_cxegyr.svg"><br>
+                  <span class="headerUserTitle">{{loggedUser}}</span>
+                  <p class="headerUserRole">
+                    {{loggedUserRole}}</p>
+                  <span class="close " (click)="close()" style="margin-top: -20px;"><span class="icon-cancel"></span></span>
+            
+                </div>
+                <div class="modal-bodyForTask" style="background: #FAFAFA; margin-top: -6px; padding-bottom: 20px;">
+                  <form name="changeUserRoleForm" id="changeUserRoleForm" (ngSubmit)="submitchangeUserRole()">
+                    <span class="close ForMobile" (click)="close()"><span class="icon-cancel"></span></span>
+                    <span class="addT">Change User Role</span>
+                    <p class="choose_role">Choose between Developer, Admin, Quality Analyst or Owner.</p>
+                    <select [(ngModel)]="new_role" name="new_role" class="custom-select">
+                      <option value="admin">Admin</option>
+                      <option value="developer">Developer</option>
+                      <option value="owner">Owner</option>
+                      <option value="quality analyst">Quality Analyst</option>
+                    </select>
+                    <div class="submitTask">
+                      <button type="submit" id="changeUserRoleBtn" class="btn addTbtn" style="width: 165px;">CHANGE</button>
+                      <span class="btn closebtn" id="cancelAddTaskBtn" style="font-weight: bold;" (click)="close()">CANCEL</span>
+                    </div>
+                  </form>
+                </div>
+                <div class="remove_user btn" (click)="deleteUser()">
+                  REMOVE USER
+                </div>
+              </div>
+            </div>
+    
+            <!-- <div>Modal Box Stops Here</div> -->
+            
+            <div class="container">
+              <div id="sprintAlert" class="sprintAlert" style="margin-top: -20px;margin-bottom: 10px;">
+                <strong class="mr-auto">Hello! {{loggedUser}}, </strong>Would you like to Start a new Sprint? <bold
+                  (click)="startNewSprint(); sprintAlertHidden()">Yes </bold>
+                <bold (click)="sprintAlertHidden()">No</bold>
+              </div>
+            </div>
+            
+            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
+              <div class="container">
+                <div class="row">
+                  <div class="col">
+                    <div class="ex" id="tfw">
+                      <h4>Tasks for the week</h4>
+                      <div 
+                        class="example-list" 
+                        cdkDropList #tftwList="cdkDropList" 
+                        [cdkDropListData]="TFTW"
+                        [cdkDropListConnectedTo]="[tftdList, verifyList, doneList]" 
+                        (cdkDropListDropped)="drop($event)"
+                        id="{{loggedUserId}}e0"
+                      >
+                        <div *ngFor="let item of TFTW"  cdkDrag [cdkDragData]="item" >
+                          <div
+                            *ngIf="item['taskFor'] == loggedUserId && item['task'] != '' && item['timeCreated'] &#62;= loggedSprint['dateCreated'] && loggedSprint['endDate'] &#62;= item['timeCreated']">
+                            <div class="dragged_item_placeholder" *cdkDragPlaceholder><span class="icon-plus-symbol" style="font-size: 32px;"></span></div>
+                            <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" >
+                              <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                              <div style="cursor: move;" class="task_text">
+                                {{item['task']}}
+                              </div><br>
+                              <div class="uploadedImage" *ngIf="item['file']">
+                                <img #viewClickedImage [attr.image_to_view]="'image' + item['goalID']"
+                                  src="{{dataService.domain_protocol}}{{dataService.domain_name}}{{item['file']}}"
+                                  (click)="userImageModal(viewClickedImage); hideslackchat()">
+                                  <!--Drag Preview-->
+                                  <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" *cdkDragPreview>
+                                    <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                    <div style="cursor: move;" class="task_text">
+                                      {{item['task']}}
+                                    </div><br>
+                                        
+                                    <div class="scrumtools">
+                                      <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                      <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                        [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                        (click)="editTaskModal(loggedUserId)"></span>
+                                      <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                        class="icon-camera tools" alt="upload image" title="upload image"
+                                        (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                        alt="copy" title="copy" style="font-size: 15px;"
+                                        (click)="copyToClipboard(loggedUserId)"></i>
+                                      <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                      <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                      <span class="icon-move tools" alt="move" title="move"></span>
+                                    </div>
+                                  </div>
+                                  <!--Drag preview Ends-->
+                              </div>
+    
+                              <div class="scrumtools">
+                                <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                  [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                  (click)="editTaskModal(loggedUserId)"></span>
+                                <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                  class="icon-camera tools" alt="upload image" title="upload image"
+                                  (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                  alt="copy" title="copy" style="font-size: 15px;"
+                                  (click)="copyToClipboard(loggedUserId)"></i>
+                                <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                <span class="icon-move tools" alt="move" title="move"></span>
+                              </div>
+                            </div>
+                            
+                            
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+    
+                  </div>
+                  <div class="col ">
+                    <div class="ex" id="tft">
+                      <h4>Todays Target</h4>
+                      <div
+                        class="example-list"
+                        cdkDropList #tftdList="cdkDropList"
+                        [cdkDropListData]="TFTD"
+                        [cdkDropListConnectedTo]="[tftwList, verifyList, doneList]"
+                        (cdkDropListDropped)="drop($event)"
+                        id="{{loggedUserId}}e1"
+                      >
+                        <div *ngFor="let item of TFTD"  cdkDrag [cdkDragData]="item">
+                          <div
+                            *ngIf="item['taskFor'] == loggedUserId && item['task'] != '' && item['timeCreated'] &#62;= loggedSprint['dateCreated'] && loggedSprint['endDate'] &#62;= item['timeCreated']">
+                            <div class="dragged_item_placeholder" *cdkDragPlaceholder><span class="icon-plus-symbol" style="font-size: 32px;"></span></div>
+                            <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+                              <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                              <div style="cursor: move;" class="task_text">
+                                {{item['task']}}
+                              </div><br>
+                              <div class="uploadedImage" *ngIf="item['file']"> 
+                                <img #viewClickedImage [attr.image_to_view]="'image' + item['goalID']"
+                                  src="{{dataService.domain_protocol}}{{dataService.domain_name}}{{item['file']}}"
+                                  (click)="userImageModal(viewClickedImage); hideslackchat()">
+                                  <!--Drag Preview-->
+                                  <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" *cdkDragPreview>
+                                    <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                    <div style="cursor: move;" class="task_text">
+                                      {{item['task']}}
+                                    </div><br>
+                                        
+                                    <div class="scrumtools">
+                                      <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                      <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                        [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                        (click)="editTaskModal(loggedUserId)"></span>
+                                      <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                        class="icon-camera tools" alt="upload image" title="upload image"
+                                        (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                        alt="copy" title="copy" style="font-size: 15px;"
+                                        (click)="copyToClipboard(loggedUserId)"></i>
+                                      <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                      <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                      <span class="icon-move tools" alt="move" title="move"></span>
+                                    </div>
+                                  </div>
+                                  <!--Drag preview Ends-->
+                               </div> 
+    
+                              <div class="scrumtools">
+                                <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                  [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                  (click)="editTaskModal(loggedUserId)"></span>
+                                <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                  class="icon-camera tools" alt="upload image" title="upload image"
+                                  (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                  alt="copy" title="copy" style="font-size: 15px;"
+                                  (click)="copyToClipboard(loggedUserId)"></i>
+                                <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools"
+                                  (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                <span class="icon-move tools" alt="move" title="move"></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="ex" id="verify">
+                      <h4>Verify Task</h4>
+                      <div
+                        class="example-list"
+                        cdkDropList #verifyList="cdkDropList"
+                        [cdkDropListData]="verify"
+                        [cdkDropListConnectedTo]="[tftwList, tftdList, doneList]"
+                        (cdkDropListDropped)="drop($event)"
+                        id="{{loggedUserId}}e2"
+                      >
+                        <div *ngFor="let item of verify" cdkDrag [cdkDragData]="item">
+                          <div
+                            *ngIf="item['taskFor'] == loggedUserId && item['task'] != '' && item['timeCreated'] &#62;= loggedSprint['dateCreated'] && loggedSprint['endDate'] &#62;= item['timeCreated']">
+                            <div class="dragged_item_placeholder" *cdkDragPlaceholder><span class="icon-plus-symbol" style="font-size: 32px;"></span></div>
+                            <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);">
+                              <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                              <div style="cursor: move;" class="task_text">
+                                {{item['task']}}
+                              </div><br>
+                              <div class="uploadedImage" *ngIf="item['file']">
+                                <img #viewClickedImage [attr.image_to_view]="'image' + item['goalID']"
+                                  src="{{dataService.domain_protocol}}{{dataService.domain_name}}{{item['file']}}" (click)="userImageModal(viewClickedImage); hideslackchat()">
+                                  <!--Drag Preview-->
+                                  <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" *cdkDragPreview>
+                                    <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                    <div style="cursor: move;" class="task_text">
+                                      {{item['task']}}
+                                    </div><br>
+                                        
+                                    <div class="scrumtools">
+                                      <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                      <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                        [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                        (click)="editTaskModal(loggedUserId)"></span>
+                                      <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                        class="icon-camera tools" alt="upload image" title="upload image"
+                                        (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                        alt="copy" title="copy" style="font-size: 15px;"
+                                        (click)="copyToClipboard(loggedUserId)"></i>
+                                      <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                      <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                      <span class="icon-move tools" alt="move" title="move"></span>
+                                    </div>
+                                  </div>
+                                  <!--Drag preview Ends-->
+                              </div>
+                        
+                              <div class="scrumtools">
+                                <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                <span #loggedUserId [attr.task_to_edit]="item['task']" [attr.task_id_to_edit]="item['goalID']"
+                                  class="icon-pencil tools" alt="edit" title="edit" (click)="editTaskModal(loggedUserId)"></span>
+                                <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']" class="icon-camera tools"
+                                  alt="upload image" title="upload image" (click)="uploadImage(loggedUserUploadImage)"></span><i
+                                  class="fas fa-clone tools" alt="copy" title="copy" style="font-size: 15px;"
+                                  (click)="copyToClipboard(loggedUserId)"></i>
+                                <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools"
+                                  (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                <span class="icon-move tools" alt="move" title="move"></span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="ex" id="done">
+                      <!-- <div style="margin-left: 10px;"> -->
+                      <h4 style="margin-bottom: 7px;">Done</h4>
+                      <div class="child"  style="position: relative;">
+                        <div>
+                          <div
+                            class="example-list"
+                            cdkDropList #doneList="cdkDropList"
+                            [cdkDropListData]="done"
+                            [cdkDropListConnectedTo]="[tftwList, tftdList, verifyList]"
+                            (cdkDropListDropped)="drop($event)"
+                            id="{{loggedUserId}}e3"
+                          >
+                            <div *ngFor="let item of done"  cdkDrag [cdkDragData]="item">
+                              <div
+                                *ngIf="item['taskFor'] == loggedUserId && item['task'] != '' && item['timeCreated'] &#62;= loggedSprint['dateCreated'] && loggedSprint['endDate'] &#62;= item['timeCreated']">
+                                <div class="dragged_item_placeholder" *cdkDragPlaceholder><span class="icon-plus-symbol" style="font-size: 32px;"></span></div>
+                                <div style="position: absolute; left: 8px; margin-top: -25px;">
+                                  <span style="font-weight: bold; font-size: 13px; font-family: 'roboto',sans-serif;">{{item['pushID']}}</span>
+                                </div>
+                            
+                                <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1); margin-top: 35px;">
+                                  <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                  <div style="cursor: move;" class="task_text">
+                                    {{item['task']}}
+                                  </div><br>
+                                  <div class="uploadedImage" *ngIf="item['file']">
+                                    <img #viewClickedImage [attr.image_to_view]="'image' + item['goalID']"
+                                      src="{{dataService.domain_protocol}}{{dataService.domain_name}}{{item['file']}}" (click)="userImageModal(viewClickedImage); hideslackchat()">
+                                      <!--Drag Preview-->
+                                  <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" *cdkDragPreview>
+                                    <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                    <div style="cursor: move;" class="task_text">
+                                      {{item['task']}}
+                                    </div><br>
+                                        
+                                    <div class="scrumtools">
+                                      <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                      <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                        [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                        (click)="editTaskModal(loggedUserId)"></span>
+                                      <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                        class="icon-camera tools" alt="upload image" title="upload image"
+                                        (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                        alt="copy" title="copy" style="font-size: 15px;"
+                                        (click)="copyToClipboard(loggedUserId)"></i>
+                                      <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                      <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                      <span class="icon-move tools" alt="move" title="move"></span>
+                                    </div>
+                                  </div>
+                                  <!--Drag preview Ends-->
+                                  </div>
+                                  <div class="scrumtools">
+                                    <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                    <span #loggedUserId [attr.task_to_edit]="item['task']" [attr.task_id_to_edit]="item['goalID']"
+                                      class="icon-pencil tools" alt="edit" title="edit" (click)="editTaskModal(loggedUserId)"></span>
+                                    <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']" class="icon-camera tools"
+                                      alt="upload image" title="upload image" (click)="uploadImage(loggedUserUploadImage)"></span><i
+                                      class="fas fa-clone tools" alt="copy" title="copy" style="font-size: 15px;"
+                                      (click)="copyToClipboard(loggedUserId)"></i>
+                                    <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                    <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools"
+                                      (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                    <span class="icon-move tools" alt="move" title="move"></span>
+                                    <i style="margin-right: 0px!Important; margin-left: 0px!Important;" class="fas fa-trash tools" alt="delete" title="delete" (click)="deleteTask(item['goalID'], item['task'])" [hidden]="loggedUserRole == 'Developer'"></i>
+                                  </div>
+                                </div>
+                              </div>
+                            
+                            </div>
+                          </div>
+    
+                        </div>
+                      </div>
+                      <!-- </div> -->
+                    </div>
+                  </div>
+                </div>
+                <div style="margin-top:5px; padding: 15px 0px;">
+                </div>
+              </div>
+            </div>
+    
+            <div class="tab-pane show fade active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+              <div class="container">
+                <div cdkDropListGroup>
+                  <div *ngFor="let user of users">
+                    <details open #teamDetail id="teamTaskDropDown" class="teamTaskDetail" [attr.data-target]="user['userID']"
+                      (click)="borderRadious(teamDetail)">
+                      <summary>
+                        <div class="teamTaskDropDownMenu" [ngStyle]="{'background':'rgba('+user['userColor']+','+'0.1'+')'}" id="{{user['userID']}}">
+                          <div>
+                            <img src="https://res.cloudinary.com/ros4eva/image/upload/v1581417531/Ellipse_2_ithyej.png"
+                            [ngStyle]="{'border':' 1px solid rgb('+user['userColor']+')'}"
+                            >
+                            <ul class="ttUserProfile">
+                              <li ><span class="teamTaskTitle" [ngStyle]="{'color':' rgb('+user['userColor']+')'}">{{user['userName']}}</span></li>
+                              <li style="margin-top: -4px;" class="ttTasksandTime">{{user['userTotalWeekHour']}} hours | {{user['scrumGoalSet']}} Tasks
+                              </li>
+                            </ul>
+                          </div>
+                          <div style="float: right;">
+                            <ul class="teamTaskTools" #getUserRoleId [attr.user_role_id]="user['userID']">
+                              <li><i [ngStyle]="{'background':'rgb('+user['userColor']+')'}"  class="fas fa-user-cog" alt="Change {{user['userName']}}'s role" title="Change {{user['userName']}}'s role" (click)="changeUserRoleModal(user['userID'])"></i></li>
+                              <li><i [ngStyle]="{'background':'rgb('+user['userColor']+')'}" class="fas fa-plus" alt="Add task to {{user['userName']}}" title="Add task to {{user['userName']}}" (click)="addTaskModal('task', getUserRoleId);"></i></li>
+                              <li><i [ngStyle]="{'background':'rgb('+user['userColor']+')'}" style="padding: 5px 7px;" alt="Add note to {{user['userName']}}" title="Add note to {{user['userName']}}" (click)="addTaskModal('note', getUserRoleId); hideslackchat()"><span
+                                    class="icon-Group-1" ></span></i></li>
+                              <li><i [ngStyle]="{'background':'rgb('+user['userColor']+')'}" class="fas fa-user" alt="View task history for user['userName']" title="View task history of {{user['userName']}}"  (click)="userProfileModal(user['userID'], user['userName'], user['userRole']);hideslackchat()"></i></li>
+                              <li><i [ngStyle]="{'background':'rgb('+user['userColor']+')'}" id="toggledUp{{user['userID']}}" class="fas fa-chevron-up"></i></li>
+                            </ul>
+                          </div>
+                        </div>
+                      </summary>
+                      <div class="ttDropDownContent" style="width: 100%;">
+                        <div class="row">
+                          <div class="col" style="padding-left:6px!important;">
+                            <div class="ex" id="tfw" [ngStyle]="{'border-color':' rgb('+user['userColor']+')'}">
+                              <h4>Tasks for the week</h4>
+                              <div class="example-list" cdkDropList  [cdkDropListData]="TFTW"
+                                 (cdkDropListDropped)="drop($event)" id="{{user.userID}}e0">
+                                <div *ngFor="let item of TFTW" cdkDrag [cdkDragData]="item" >
+                                  <div
+                                    *ngIf="item['taskFor'] == user['userID'] && item['task'] != '' && item['timeCreated'] &#62;= loggedSprint['dateCreated'] && loggedSprint['endDate'] &#62;= item['timeCreated']">
+                                    <div class="dragged_item_placeholder" *cdkDragPlaceholder><span class="icon-plus-symbol" style="font-size: 32px;"></span></div>
+                                    <div class="excontent" [ngStyle]="{'border-color':' rgb('+user['userColor']+')'}">
+                                      <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                      <div style="cursor: move;" class="task_text">
+                                        {{item['task']}}
+                                      </div><br>
+                                      <div class="uploadedImage" *ngIf="item['file']">
+                                        <img #viewClickedImage [attr.image_to_view]="'image' + item['goalID']"
+                                          src="{{dataService.domain_protocol}}{{dataService.domain_name}}{{item['file']}}"
+                                          (click)="userImageModal(viewClickedImage); hideslackchat()">
+                                          <!--Drag Preview-->
+                                  <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" *cdkDragPreview>
+                                    <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                    <div style="cursor: move;" class="task_text">
+                                      {{item['task']}}
+                                    </div><br>
+                                        
+                                    <div class="scrumtools">
+                                      <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                      <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                        [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                        (click)="editTaskModal(loggedUserId)"></span>
+                                      <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                        class="icon-camera tools" alt="upload image" title="upload image"
+                                        (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                        alt="copy" title="copy" style="font-size: 15px;"
+                                        (click)="copyToClipboard(loggedUserId)"></i>
+                                      <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                      <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                      <span class="icon-move tools" alt="move" title="move"></span>
+                                    </div>
+                                  </div>
+                                  <!--Drag preview Ends-->
+                                      </div>
+                  
+                                      <div class="scrumtools">
+                                        <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                        <span #user [attr.task_to_edit]="item['task']" [attr.task_id_to_edit]="item['goalID']"
+                                          class="icon-pencil tools" alt="edit" title="edit" (click)="editTaskModal(user)"></span>
+                                        <span #userUploadImage [attr.task_id_to_upload_img]="item['goalID']" class="icon-camera tools"
+                                          alt="upload image" title="upload image" (click)="uploadImage(userUploadImage)"></span><i
+                                          class="fas fa-clone tools" alt="copy" title="copy" style="font-size: 15px;"
+                                          (click)="copyToClipboard(user)"></i>
+                                        <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                        <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools"
+                                          (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                        <span class="icon-move tools" alt="move" title="move"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                  
+                          </div>
+                          <div class="col ">
+                            <div class="ex" id="tft" [ngStyle]="{'border-color':' rgb('+user['userColor']+')'}">
+                              <h4>Todays Target</h4>
+                              <div class="example-list" cdkDropList [cdkDropListData]="TFTD"
+                                 (cdkDropListDropped)="drop($event)" id="{{user.userID}}e1">
+                                <div *ngFor="let item of TFTD" cdkDrag [cdkDragData]="item" >
+                                  <div
+                                    *ngIf="item['taskFor'] == user['userID'] && item['task'] != '' && item['timeCreated'] &#62;= loggedSprint['dateCreated'] && loggedSprint['endDate'] &#62;= item['timeCreated']">
+                                    <div class="dragged_item_placeholder" *cdkDragPlaceholder><span class="icon-plus-symbol" style="font-size: 32px;"></span></div>
+                                    <div class="excontent" [ngStyle]="{'border-color':' rgb('+user['userColor']+')'}">
+                                      <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                      <div style="cursor: move;" class="task_text">
+                                        {{item['task']}}
+                                      </div><br>
+                                      <div class="uploadedImage" *ngIf="item['file']">
+                                        <img #viewClickedImage [attr.image_to_view]="'image' + item['goalID']"
+                                          src="{{dataService.domain_protocol}}{{dataService.domain_name}}{{item['file']}}"
+                                          (click)="userImageModal(viewClickedImage); hideslackchat()">
+                                          <!--Drag Preview-->
+                                  <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" *cdkDragPreview>
+                                    <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                    <div style="cursor: move;" class="task_text">
+                                      {{item['task']}}
+                                    </div><br>
+                                        
+                                    <div class="scrumtools">
+                                      <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                      <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                        [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                        (click)="editTaskModal(loggedUserId)"></span>
+                                      <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                        class="icon-camera tools" alt="upload image" title="upload image"
+                                        (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                        alt="copy" title="copy" style="font-size: 15px;"
+                                        (click)="copyToClipboard(loggedUserId)"></i>
+                                      <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                      <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                      <span class="icon-move tools" alt="move" title="move"></span>
+                                    </div>
+                                  </div>
+                                  <!--Drag preview Ends-->
+                                      </div>
+                  
+                                      <div class="scrumtools">
+                                        <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                        <span #user [attr.task_to_edit]="item['task']" [attr.task_id_to_edit]="item['goalID']"
+                                          class="icon-pencil tools" alt="edit" title="edit" (click)="editTaskModal(user)"></span>
+                                        <span #userUploadImage [attr.task_id_to_upload_img]="item['goalID']" class="icon-camera tools"
+                                          alt="upload image" title="upload image" (click)="uploadImage(userUploadImage)"></span><i
+                                          class="fas fa-clone tools" alt="copy" title="copy" style="font-size: 15px;"
+                                          (click)="copyToClipboard(user)"></i>
+                                        <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                        <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools"
+                                          (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                        <span class="icon-move tools" alt="move" title="move"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="ex" id="verify" [ngStyle]="{'border-color':' rgb('+user['userColor']+')'}">
+                              <h4>Verify Task</h4>
+                              <!-- <div style="margin-left: -8em; margin-bottom: 8px;" *ngFor="let item of done">
+                                                                      <span style="font-weight: bold; margin-left: -1em;" *ngIf="item['taskFor'] == user['userID']">{{item['pushID']}}
+                                                                      </span>
+                                                                  </div> -->
+                              <div class="example-list" cdkDropList [cdkDropListData]="verify"
+                                 (cdkDropListDropped)="drop($event)" id="{{user.userID}}e2">
+                                <div *ngFor="let item of verify" cdkDrag [cdkDragData]="item" >
+                                  <div
+                                    *ngIf="item['taskFor'] == user['userID'] && item['task'] != '' && item['timeCreated'] &#62;= loggedSprint['dateCreated'] && loggedSprint['endDate'] &#62;= item['timeCreated']">
+                                      <div class="dragged_item_placeholder" *cdkDragPlaceholder><span class="icon-plus-symbol" style="font-size: 32px;"></span></div>
+                                    <div class="excontent" [ngStyle]="{'border-color':' rgb('+user['userColor']+')'}">
+                                      <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                      <div style="cursor: move;" class="task_text">
+                                        {{item['task']}}
+                                      </div><br>
+                                      <div class="uploadedImage" *ngIf="item['file']">
+                                        <img #viewClickedImage [attr.image_to_view]="'image' + item['goalID']"
+                                          src="{{dataService.domain_protocol}}{{dataService.domain_name}}{{item['file']}}"
+                                          (click)="userImageModal(viewClickedImage); hideslackchat()">
+                                          <!--Drag Preview-->
+                                  <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" *cdkDragPreview>
+                                    <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                    <div style="cursor: move;" class="task_text">
+                                      {{item['task']}}
+                                    </div><br>
+                                        
+                                    <div class="scrumtools">
+                                      <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                      <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                        [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                        (click)="editTaskModal(loggedUserId)"></span>
+                                      <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                        class="icon-camera tools" alt="upload image" title="upload image"
+                                        (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                        alt="copy" title="copy" style="font-size: 15px;"
+                                        (click)="copyToClipboard(loggedUserId)"></i>
+                                      <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                      <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                      <span class="icon-move tools" alt="move" title="move"></span>
+                                    </div>
+                                  </div>
+                                  <!--Drag preview Ends-->
+                                      </div>
+                  
+                                      <div class="scrumtools">
+                                        <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                        <span #user [attr.task_to_edit]="item['task']" [attr.task_id_to_edit]="item['goalID']"
+                                          class="icon-pencil tools" alt="edit" title="edit" (click)="editTaskModal(user)"></span>
+                                        <span #userUploadImage [attr.task_id_to_upload_img]="item['goalID']" class="icon-camera tools"
+                                          alt="upload image" title="upload image" (click)="uploadImage(userUploadImage)"></span><i
+                                          class="fas fa-clone tools" alt="copy" title="copy" style="font-size: 15px;"
+                                          (click)="copyToClipboard(user)"></i>
+                                        <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                        <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools"
+                                          (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                        <span class="icon-move tools" alt="move" title="move"></span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="col">
+                            <div class="ex" id="done" [ngStyle]="{'border-color':' rgb('+user['userColor']+')'}">
+                              <!-- <div style="margin-left: 10px;"> -->
+                              <h4 style="margin-bottom: 7px;">Done</h4>
+                              <div class="child" style="position: relative;">
+                                <div>
+                                  <div class="example-list" cdkDropList [cdkDropListData]="done"
+                                    (cdkDropListDropped)="drop($event)"
+                                    id="{{user.userID}}e3">
+                                    <div *ngFor="let item of done" cdkDrag [cdkDragData]="item">
+                                      <div
+                                        *ngIf="item['taskFor'] == user['userID'] && item['task'] != '' && item['timeCreated'] &#62;= loggedSprint['dateCreated'] && loggedSprint['endDate'] &#62;= item['timeCreated']">
+                                        <div class="dragged_item_placeholder" *cdkDragPlaceholder><span class="icon-plus-symbol" style="font-size: 32px;"></span></div>
+                                        <div style="position: absolute; left: 8px; margin-top: -25px;">
+                                          <span style="font-weight: bold; font-size: 13px; font-family: 'roboto',sans-serif;">{{item['pushID']}}</span>
+                                        </div>
+                                        
+                                        <div class="excontent fordone" [ngStyle]="{'border-color':' rgb('+user['userColor']+')'}" >
+                                          <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                          <div style="cursor: move;" class="task_text">
+                                            {{item['task']}}
+                                          </div><br>
+                                          <div class="uploadedImage" *ngIf="item['file']">
+                                            <img #viewClickedImage [attr.image_to_view]="'image' + item['goalID']"
+                                              src="{{dataService.domain_protocol}}{{dataService.domain_name}}{{item['file']}}"
+                                              (click)="userImageModal(viewClickedImage); hideslackchat()">
+                                              <!--Drag Preview-->
+                                  <div class="excontent" style="border: 1px solid rgba(0, 0, 0, 0.1);" *cdkDragPreview>
+                                    <div class="task_days_failed" [hidden]="item['days_failed'] == '0'">{{item['days_failed']}}</div>
+                                    <div style="cursor: move;" class="task_text">
+                                      {{item['task']}}
+                                    </div><br>
+                                        
+                                    <div class="scrumtools">
+                                      <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                      <span #loggedUserId [attr.task_to_edit]="item['task']"
+                                        [attr.task_id_to_edit]="item['goalID']" class="icon-pencil tools" alt="edit" title="edit"
+                                        (click)="editTaskModal(loggedUserId)"></span>
+                                      <span #loggedUserUploadImage [attr.task_id_to_upload_img]="item['goalID']"
+                                        class="icon-camera tools" alt="upload image" title="upload image"
+                                        (click)="uploadImage(loggedUserUploadImage)"></span><i class="fas fa-clone tools"
+                                        alt="copy" title="copy" style="font-size: 15px;"
+                                        (click)="copyToClipboard(loggedUserId)"></i>
+                                      <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                      <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools" (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                      <span class="icon-move tools" alt="move" title="move"></span>
+                                    </div>
+                                  </div>
+                                  <!--Drag preview Ends-->
+                                          </div>
+                                          <div class="scrumtools">
+                                            <n style="margin-right: 8px;">{{item['goalID']}}</n>
+                                            <span #user [attr.task_to_edit]="item['task']" [attr.task_id_to_edit]="item['goalID']"
+                                              class="icon-pencil tools" alt="edit" title="edit" (click)="editTaskModal(user)"></span>
+                                            <span #userUploadImage [attr.task_id_to_upload_img]="item['goalID']" class="icon-camera tools"
+                                              alt="upload image" title="upload image" (click)="uploadImage(userUploadImage)"></span><i
+                                              class="fas fa-clone tools" alt="copy" title="copy" style="font-size: 15px;"
+                                              (click)="copyToClipboard(user)"></i>
+                                            <i class="fas fa-envelope tools" alt="task chat" title="task chat"></i>
+                                            
+                                              <span alt="history" title="history" id="taskHistory" class="icon-history-clock-button tools"
+                                                (click)="taskHistory(); viewTaskHistory(item['goalID']); hideslackchat()"></span>
+                                            <span class="icon-move tools" alt="move" title="move"></span>
+                                            <i style="margin-right: 0px!Important;  margin-left: 0px!Important;" class="fas fa-trash tools" alt="delete" title="delete" (click)="deleteTask(item['goalID'], item['task'])" [hidden]="loggedUserRole == 'Developer'"></i>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                  
+                                </div>
+                              </div>
+                              <!-- </div> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </details>
+                  </div>
+                  <div style="margin-top:5px; padding: 15px 0px;"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <!-- modal for websocket chat     -->
+        <div class="card">
+          <div class="card-header msg_head">
+              <span>Scrum Chat</span>
+              <p>Messages</p>
+          </div>
+          <div class="card-body msg_card_body" #scrollMe [scrollTop]="scrollMe.scrollHeight">
+                  <div *ngFor="let message of my_messages">
+                      <div class="d-flex justify-content-start mb-4" *ngIf= "message.username !== username">
+                          <div class="img_cont_msg">
+                              <img src="https://static.turbosquid.com/Preview/001292/481/WV/_D.jpg" alt="" class="rounded-circle user_img_msg">
+                          </div>
+                          <div class="msg_container">
+                            <b>{{message.username}}:</b> &nbsp; {{message.message || message.content}}
+                            <span class="msg_time">{{message.timestamp}}</span>
+                          </div>
+                      </div>
+                      <div class="d-flex justify-content-end mb-4" *ngIf= "message.username == username">
+                          <div class="msg_container_send">
+                              {{message.message || message.content}}
+                              <span class="msg_time_send">{{message.timestamp}}</span>
+                          </div>
+                      </div>
+                  </div>
+          </div>
+          <div class="card-footer">
+              <form #sendForm = "ngForm">
+                  <div class="input-group">
+                      <!-- <textarea name="chat_text" class="form-control type_msg" placeholder="Type your message..." ngModel></textarea> -->
+                      <textarea class="form-control type_msg" [mention]="listUsers" [mentionConfig]="mentionConfig" [(mentioned-user)]="mention.item" placeholder="Send a message" #chattext= "ngModel" [(ngModel)]= "chat_text" name=chattext></textarea>
+                      <div class="input-group-append" (click)="sendAMessage(sendForm)">
+                          <span class="input-group-text send_btn"><i class="fas fa-location-arrow"></i></span>
+                      </div>
+                  </div>
+              </form>
+          </div>
+        </div>
+        <!-- modal for websocket chat end -->
+      </div>
+    </div>
+   
+    
+  </div>
+
+</div>
+
+
+<!-- 
+
+
+  <div class="slackNotification">
+            <span>Joshua Okwe has joined the chat</span>
+          </div>
+          <div class="container slackMessage">
+            <div class="userName">
+              <img src="https://res.cloudinary.com/ros4eva/image/upload/v1581554201/Ellipse_5_rzifrh.png">
+              <h3>Joshua Okwe</h3>
+            </div>
+            <div class="userMsg">
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit</span>
+            </div>
+            <div class="msgTime">
+              <p>10:02 am • 9-07-2019</p>
+            </div>
+          </div>
+
+          <div class="container slackMessage">
+            <div class="userName">
+              <img src="https://res.cloudinary.com/ros4eva/image/upload/v1581417531/Ellipse_2_ithyej.png">
+              <h3 style="color: #FF4D6D;">Azeem Animashaun</h3>
+            </div>
+            <div class="userMsg">
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna
+                aliqua.</span>
+            </div>
+            <div class="msgTime">
+              <p>10:02 am • 9-07-2019</p>
+            </div>
+          </div>
+
+          <div class="slackNotification">
+            <span>Louis E has joined the chat</span>
+          </div>
+
+          <div class="container slackMessage">
+            <div class="userName">
+              <img src="https://res.cloudinary.com/ros4eva/image/upload/v1581553992/Ellipse_3_fb4kdi.svg">
+              <h3 style="color: #59BB1E;">Louis E</h3>
+            </div>
+            <div class="userMsg">
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna
+                aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore
+                magna aliqua.</span>
+            </div>
+            <div class="msgTime">
+              <p>10:02 am • 9-07-2019</p>
+            </div>
+          </div>
+
+          <div class="slackNotification">
+            <span>Azeem Animashaun has left the chat</span>
+          </div>
+
+          <div class="slackNotification">
+            <span>Olufeko Samuel has joined the chat</span>
+          </div>
+
+          <div class="slackNotification">
+            <span>Oluwaseyi.E has left the chat</span>
+          </div>
+
+          <div class="container slackMessage">
+            <div class="userName">
+              <img src="https://res.cloudinary.com/ros4eva/image/upload/v1581554201/Ellipse_5_rzifrh.png">
+              <h3>Joshua Okwe</h3>
+            </div>
+            <div class="userMsg">
+              <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                incididunt ut labore et dolore magna
+                aliqua.</span>
+            </div>
+            <div class="msgTime">
+              <p>10:02 am • 9-07-2019</p>
+            </div>
+          </div>
+-->

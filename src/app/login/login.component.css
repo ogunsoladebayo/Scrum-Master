@@ -1,0 +1,465 @@
+* {
+  outline: none!important;
+  
+}
+
+body {
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -webkit-filter: blur(0.000000px)!important;
+    overflow-y: visible;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    right:0;
+}
+
+
+#alert-success, #alert-error {
+  display: none;
+}
+
+
+.conts {
+    background:#26A69A;
+}
+
+.navc {
+    border-bottom: none;
+}
+
+
+@media (min-width: 1200px) {
+    .navc .container {
+        max-width: 100vw;
+    }
+
+    #gride h2 {
+      font-size: 36px;
+    }
+
+    .navc .navbar-brand {
+        margin-left: 2.3em;
+    }
+}
+
+@media (min-width: 340px) {
+    #gride {
+      margin-top:2em!important;
+    }
+}
+
+@media (min-width: 700px) {
+    #gride {
+      margin-top:5em!important;
+    }
+}
+
+@media (min-width: 800px) {
+    #gride {
+      margin-top:8em!important;
+    }
+}
+
+
+@media (min-width: 1200px) {
+
+    .footw .float-left {
+        margin-left: 6em;
+    }
+}
+
+@media (min-width: 542px){
+
+    #gride {
+        margin-left: 4em;
+        max-height: 60vh;
+
+    }
+
+    /*.contain {
+        
+        max-height: 200px;
+        
+    }*/
+    
+}
+
+.conts {
+    padding-bottom: 300px;
+}
+
+.lgbtn span a, .lgbtn span {
+    color: white;
+    text-decoration: none;
+}
+
+
+#gride input[type=text], input[type=password], input[type=email] {
+  width: 100%;
+  padding: 8px 20px;
+  background: rgba(255, 255, 255, 0.2);
+  display: inline-block;
+  border: none;
+  box-sizing: border-box;
+  border-radius: 5px;
+  outline-color: #26A69A;
+  margin-top: -5px;
+  margin-bottom: 1em;
+}
+
+#gride label[for=usertype] {
+  margin-bottom: 2px;
+}
+
+::-webkit-input-placeholder {
+  font-style: italic;
+}
+
+:-ms-input-placeholder {
+  font-style: italic;
+}
+
+::placeholder {
+  font-style: italic;
+}
+
+#gride h2 {
+    color: white;
+    font-weight: 600;
+    margin-top:1em;
+}
+
+.formContainer {
+  padding: 16px;
+}
+
+span.psw {
+  float: right;
+  padding-top: 16px;
+  
+}
+
+#gride .lgbtn {
+  margin-top: 0.5em;
+}
+
+.loginbtn {
+    background: #4DFFD4; 
+    padding: 4px 40px; 
+    font-weight: bold;
+    margin-top: 0.6em;
+    margin-bottom: 0.6em;
+    font-size: 15px;
+}
+
+#gride label[for=email], label[for=projname], label[for=psw], label[for=name], label[for=usertype] {
+    margin-top: 2px;
+    color: #4DFFD4;
+    font-size: 15px;
+    
+}
+
+#gride label[for=email] {
+    margin-top: 0;
+}
+
+
+
+
+@media screen and (max-width: 300px) {
+  span.psw {
+     display: block;
+     float: none;
+  }
+  .loginbtn {
+     width: 100%;
+  }
+}
+
+
+.footd {
+    margin-top: 1em;
+}
+
+.footw {
+    padding: 7px;
+    bottom: 0%;
+    background: white;
+    border: none ;
+    width: 100%;
+    font-family: Roboto; 
+    font-size: 13px;
+    
+    left: 0;
+    box-shadow:
+        inset 0px 5px 5px rgba(38, 166, 154, 0.5);   
+}
+
+.footw .copy {
+    margin-bottom: 10px;
+}
+
+ul#menuli li {
+    display: inline;
+    margin: 10px;
+}
+
+.footw #menuli a {
+    text-decoration-style: none;
+    color: rgba(0, 0, 0, 0.6);
+    margin-right: 10px;
+}
+
+
+@media screen and (max-width: 698px) {
+    body {
+        min-height: 100vh;
+        min-width: 100vw;
+        overflow:scroll;
+    }
+
+    /* #gride {
+        margin-top: 5em;
+    } */
+
+
+    .footw {
+        padding: 10px;
+        font-size: 12px;
+        position: relative;
+    }
+
+    .imgse {
+        display: none;
+    }
+
+}
+
+@media screen and (max-width: 350px) {
+    .footw {
+    font-size: 9px;
+}
+}
+
+@media screen and (max-width: 500px) {
+    #gride h2 {
+    font-size: 20px;
+}
+}
+
+@media screen and (min-width: 581px)  and (max-width: 696px) {
+    #gride .container {
+       
+        margin-left: -4px;
+    }
+
+}
+
+@media screen and (width: 800px)  and (height: 1280px) {
+    #gride {
+       
+        padding-bottom: 350px;
+    }
+
+}
+
+.can-toggle {
+  position: relative;
+}
+.can-toggle *, .can-toggle *:before, .can-toggle *:after {
+  box-sizing: border-box;
+}
+.can-toggle input[type="checkbox"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+}
+.can-toggle input[type="checkbox"][disabled] ~ label {
+  pointer-events: none;
+}
+.can-toggle input[type="checkbox"][disabled] ~ label .can-toggle__switch {
+  opacity: 0.4;
+}
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch:before {
+  content: attr(data-unchecked);
+  left: 0;
+  text-align: left;
+}
+
+
+.can-toggle label {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch:before {
+  content: attr(data-unchecked);
+  left: 0;
+}
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch:after {
+  content: attr(data-checked);
+}
+
+.can-toggle label .can-toggle__switch:before {
+  content: attr(data-checked);
+  position: absolute;
+  top: 0;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.8);
+}
+.can-toggle label .can-toggle__switch:after {
+  content: attr(data-unchecked);
+  position: absolute;
+  z-index: 5;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.8);
+  background: #4DFFD4;
+  -webkit-transform: translate3d(0, 0, 0);
+          transform: translate3d(0, 0, 0);
+}
+
+/*.can-toggle input[type="checkbox"]:focus ~ label .can-toggle__switch, .can-toggle input[type="checkbox"]:hover ~ label .can-toggle__switch {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.can-toggle input[type="checkbox"]:focus ~ label .can-toggle__switch:after, .can-toggle input[type="checkbox"]:hover ~ label .can-toggle__switch:after {
+  color: #000000;
+}
+.can-toggle input[type="checkbox"]:hover ~ label {
+  color: #000000;
+}
+*/
+
+.can-toggle label .can-toggle__switch {
+  transition: background-color 0.3s cubic-bezier(0, 1, 0.5, 1);
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.can-toggle label .can-toggle__switch:before {
+  color: rgba(0, 0, 0);
+}
+
+.can-toggle label .can-toggle__switch:after {
+  transition: -webkit-transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  transition: transform 0.3s cubic-bezier(0, 1, 0.5, 1), -webkit-transform 0.3s cubic-bezier(0, 1, 0.5, 1);
+  color: rgb(0, 0, 0);
+}
+
+/*.can-toggle input[type="checkbox"]:focus ~ label .can-toggle__switch:after, .can-toggle input[type="checkbox"]:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}*/
+.can-toggle input[type="checkbox"]:checked ~ label .can-toggle__switch:after {
+  -webkit-transform: translate3d(65px, 0, 0);
+          transform: translate3d(65px, 0, 0);
+}
+/*.can-toggle input[type="checkbox"]:checked:focus ~ label .can-toggle__switch:after, .can-toggle input[type="checkbox"]:checked:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4);
+}*/
+
+/*.can-toggle.can-toggle--size-large input[type="checkbox"]:focus ~ label .can-toggle__switch:after, .can-toggle.can-toggle--size-large input[type="checkbox"]:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+}*/
+.can-toggle.can-toggle--size-large input[type="checkbox"]:checked ~ label .can-toggle__switch:after {
+  -webkit-transform: translate3d(103px, 0, 0);
+          transform: translate3d(103px, 0, 0);
+
+}
+/*.can-toggle.can-toggle--size-large input[type="checkbox"]:checked:focus ~ label .can-toggle__switch:after, .can-toggle.can-toggle--size-large input[type="checkbox"]:checked:hover ~ label .can-toggle__switch:after {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+}*/
+
+/* Starts Styling from here*/
+.can-toggle.can-toggle--size-large label .can-toggle__switch {
+  height: 40px;
+  flex: 0 0 168px;
+  border-radius: 4px;
+
+  
+
+}
+
+.can-toggle.can-toggle--size-large label .can-toggle__switch:before {
+  left: 50px;
+  font-size: 14px;
+  line-height: 38px;
+  width: 168px;
+  padding: 0 12px;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+  
+
+}
+.can-toggle.can-toggle--size-large label .can-toggle__switch:after {
+  top: 2px;
+  left: 6px;
+  border-radius: 5px;
+  width: 53px;
+  line-height: 30px;
+  font-size: 14px;
+  margin-top: 3px;
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: bold;
+
+}
+/*.can-toggle.can-toggle--size-large label .can-toggle__switch:hover:after {
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.4);
+}*/
+
+@media screen and (min-width: 360px) and (max-width: 500px){
+    #gride {
+        margin-top: 2em;
+    }
+
+}
+
+#alert {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: white;
+    color: black;
+    text-align: center;
+    border-radius: 2px;
+    padding: 10px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    border-radius: 5px;
+    }
+
+#alert.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes fadein {
+  from {bottom: 0; opacity: 0;} 
+  to {bottom: 30px; opacity: 1;}
+}
+
+@keyframes fadein {
+  from {bottom: 0; opacity: 0;}
+  to {bottom: 30px; opacity: 1;}
+}
+
+@-webkit-keyframes fadeout {
+  from {bottom: 30px; opacity: 1;} 
+  to {bottom: 0; opacity: 0;}
+}
+
+@keyframes fadeout {
+  from {bottom: 30px; opacity: 1;}
+  to {bottom: 0; opacity: 0;}
+}

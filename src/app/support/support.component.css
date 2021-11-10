@@ -1,0 +1,74 @@
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 50px;
+    padding-left: 50px;
+    background: #26A69A;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+    z-index: 2;
+}
+
+nav #navTools {
+    color: white;
+    margin-top: -40px;
+    font-size: 12px;
+}
+
+nav #navTools #ttask {
+    margin-right: 100px ;
+}
+
+nav #navTools #mtask, #ttask {
+    width: 166px;
+    background: rgba(255, 255, 255, 0.1);
+    height: 50px;
+}
+
+nav #navTools .navtt {
+    width: 114px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+nav #navTools #logoutAndAppInfo {
+    width: 100px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+nav #navTools #profileTab {
+    width: 179px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border-right: 2px solid rgba(255, 255, 255, 0.3);
+}
+
+.nav .nav-link.active {
+    background: rgba(255, 255, 255, 0.2);
+    border-top: 5px solid #4DFFD4;
+}
+
+@media screen and (max-width: 1300px) {
+    nav #navTools #profileTab {
+        width: 169px;
+    }
+
+    nav #navTools #logoutAndAppInfo {
+        width: 90px;
+    }
+
+    nav #navTools .navtt {
+        width: 104px;
+    }
+
+    nav #navTools #mtask, #ttask {
+        width: 156px;
+    }
+
+    nav #navTools #ttask {
+        margin-right: 80px;
+    }
+    
+}

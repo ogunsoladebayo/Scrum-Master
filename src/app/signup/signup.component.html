@@ -1,0 +1,173 @@
+<div class="conts">
+  <nav class="mb-1 navbar navbar-expand-lg navbar-dark navc" style="padding: 1em;">
+    <div class="container">
+      <a class="navbar-brand" href="home"><img
+          src="https://res.cloudinary.com/ros4eva/image/upload/v1574765308/Rectangle_3_btfp6e.png"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent-4"
+        aria-controls="navbarSupportedContent-4" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent-4">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/login" style="margin-right:1em; margin-top: 5px;">
+              <b style="font-weight:650;"> LOGIN</b>
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/createuser">
+              <button type="button" class="btn"
+                style="background: #4DFFD4; padding: 6px 50px; font-weight: bolder;">SIGN UP</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </nav>
+
+  <!-- <div class="wrapper"> -->
+  <div id="gride" class="wrapper">
+    <div class="row">
+      <div class="col col01">
+        <div class="loginForm">
+          <h2 class="container" style="font-weight: 700;">Sign up to ChatScrum</h2>
+          <!-- <span id="alert"></span> -->
+          <div id="alertBox">
+            <div id="alert-success" class="alert alert-success alert-dismissable fade show" style=" margin-left: 1em">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Success!</strong> {{dataService.message}} redirecting to Login page...
+            </div>
+            <div id="alert-error" class="alert alert-danger alert-dismissable fade show"
+              style=" margin-left: 1em; margin-bottom: -5px;">
+              <button type="button" class="close" data-dismiss="alert">&times;</button>
+              <strong>Error!</strong> {{dataService.message}}
+            </div>
+          </div>
+
+
+          <form (ngSubmit)="createUser()" id="signUp" #userSignUpForm="ngForm" novalidate name="userSignUpForm">
+
+            <div class="formContainer">
+              <div>
+                <label for="email">Email</label>
+                <input type="email" required placeholder="enter email..." name="email" #email="ngModel"
+                  [(ngModel)]="dataService.createuser_email" pattern="[A-Za-z0-9._-]+@[A-Za-z0-9]+\.[a-z]{2,}$"
+                  class="form-control" (input) ="keyup($event.target.value)" [value]="fieldvalue">
+                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="alert alert-danger"
+                  style="border: none; background: none; padding: none; color: #851111; margin-top: -10px; margin-bottom: -15px;">
+
+                  <div *ngIf="email.errors.required">
+                    <i class="fas fa-exclamation-triangle"></i> Email is required.
+                  </div>
+
+                  <div *ngIf="email.errors.pattern">
+                    <i class="fas fa-exclamation-triangle"></i> Invalid email.
+                  </div>
+
+                </div>
+              </div>
+
+
+
+              <div>
+                <label for="psw">Password</label>
+                <input type="password" placeholder="choose a password..." name="password" required #password="ngModel"
+                  pattern="^(?=.*[!@#$%^&*?/-]).{7,16}$" [(ngModel)]="dataService.createuser_password"
+                  class="form-control" minlength="3">
+                <div *ngIf="password.invalid && (password.dirty || password.touched)" class="alert alert-danger"
+                  style="border: none; background: none; padding: none; color: #851111; margin-top: -10px; margin-bottom: -15px;">
+
+                  <div *ngIf="password.errors.required">
+                    <i class="fas fa-exclamation-triangle"></i> Password is required.
+                  </div>
+                  <div *ngIf="password.errors.minlength">
+                    <i class="fas fa-exclamation-triangle"></i> Password must be at least 7 long.
+                  </div>
+                  <div *ngIf="password.errors.pattern">
+                    <i class="fas fa-exclamation-triangle"></i> Password must be combination of alphab, numbers and
+                    special characters.
+                  </div>
+
+                </div>
+              </div>
+
+
+              <div>
+                <label for="name">Full Name</label>
+                <input type="text" placeholder="enter your full name..." name="fullname" required #fullname="ngModel"
+                  required [(ngModel)]="dataService.createuser_fullname" class="form-control" minlength="4"
+                  appForbiddenName="abc">
+                <div *ngIf="fullname.invalid && (fullname.dirty || fullname.touched)" class="alert alert-danger"
+                  style="border: none; background: none; padding: none; color: #851111; margin-top: -10px; margin-bottom: -15px;">
+
+                  <div *ngIf="fullname.errors.required">
+                    <i class="fas fa-exclamation-triangle"></i> Name is required.
+                  </div>
+                  <div *ngIf="fullname.errors.minlength">
+                    <i class="fas fa-exclamation-triangle"></i> Name must be at least 4 characters long.
+                  </div>
+                  <div *ngIf="fullname.errors.forbiddenName">
+                    <i class="fas fa-exclamation-triangle"></i> Name cannot be abc.
+                  </div>
+
+                </div>
+              </div>
+
+              <div>
+                <label for="usertype">Account Type</label>
+                <div class="can-toggle can-toggle--size-large">
+                  <input id="c" type="checkbox" [(ngModel)]="dataService.createuser_usertype" name="usertype"
+                    #usertype="ngModel" (click)="showProField()">
+                  <label for="c">
+                    <div class="can-toggle__switch" data-unchecked="User" data-checked="Owner"></div>
+                  </label>
+
+                </div>
+              </div>
+
+              <div id="owner-Field">
+                <label for="projname">Project Name</label>
+                <input type="text" placeholder="enter your project name..." name="projname" #projname="ngModel"
+                  [(ngModel)]="dataService.createuser_projname" class="form-control" disabled=false id="ownerField">
+
+              </div>
+            </div>
+
+
+            <div class="container lgbtn">
+              <button type="submit" id="btn-one" (click)="sgnBTN()" class="btn loginbtn"
+                [disabled]="!userSignUpForm.valid"
+                style="background: #4DFFD4; padding: 6px 50px; font-weight: bolder;">SIGN UP</button>
+              <br><span style=" font-size: 14px;">By creating an account, you agree to our <a href="#"
+                  style="color: #4DFFD4;">Terms of Service </a> and <a href="#" style="color: #4DFFD4;"> Privacy
+                  Policy</a>.</span>
+
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="col imgse">
+
+      </div>
+    </div>
+  </div>
+</div>
+<div>
+  <footer class=" footw">
+
+    <div class="footer-copyright py-3">
+      <div class="float-left copy" style="color: rgba(0, 0, 0, 0.5);">© Chatscrum 2019</div>
+      <div class="float-right copy">
+        <ul id="menuli">
+          <li><a href="#">Support</a></li>
+          <li><a href="#">Terms of use</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+
+  </footer>
+</div>
